@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #d4a574, #c49464);
+            background: linear-gradient(135deg, #FED16A, #FFF4A4);
             margin: 0;
             padding: 20px;
             min-height: 100vh;
@@ -31,12 +31,12 @@
 
         .header {
             text-align: center;
-            background: linear-gradient(135deg, #8b4513, #a0522d);
-            color: white;
+            background: linear-gradient(135deg, #FED16A, #F97A00);
+            color: #386641;
             padding: 30px 20px;
             border-radius: 15px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 4px 15px rgba(254, 209, 106, 0.3);
         }
 
         .header h1 {
@@ -62,14 +62,68 @@
         }
 
         .section:hover {
-            border-color: #d4a574;
+            border-color: #F97A00;
         }
 
         .section h3 {
             margin: 0 0 15px 0;
-            color: #8b4513;
+            color: #386641;
             font-size: 1.3em;
             font-weight: bold;
+        }
+
+        .color-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-preset {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-preset:hover {
+            border-color: #386641;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .preset-bg, .preset-fg {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+        }
+
+        .preset-bg {
+            left: 0;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .preset-fg {
+            right: 0;
+            border-radius: 0 50% 50% 0;
+        }
+
+        input[type="checkbox"] {
+            width: 20px !important;
+            height: 20px;
+            accent-color: #386641;
+            cursor: pointer;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: #555;
+            min-width: 100px;
+            display: flex;
+            align-items: center;
         }
 
         textarea, input[type="text"], input[type="color"], select {
@@ -85,8 +139,8 @@
 
         textarea:focus, input:focus, select:focus {
             outline: none;
-            border-color: #8b4513;
-            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+            border-color: #386641;
+            box-shadow: 0 0 0 3px rgba(56, 102, 65, 0.1);
         }
 
         .input-group {
@@ -131,17 +185,17 @@
         }
 
         .size-option:hover {
-            border-color: #8b4513;
+            border-color: #386641;
             background: #f8f8f8;
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .size-option.selected {
-            border-color: #8b4513;
-            background: #8b4513;
+            border-color: #386641;
+            background: #386641;
             color: white;
-            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 4px 15px rgba(56, 102, 65, 0.3);
         }
 
         .size-name {
@@ -175,16 +229,16 @@
         }
 
         .pattern-btn:hover {
-            border-color: #8b4513;
+            border-color: #386641;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .pattern-btn.selected {
-            border-color: #8b4513;
+            border-color: #386641;
             border-width: 4px;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 6px 20px rgba(56, 102, 65, 0.3);
         }
 
         .pattern-btn canvas {
@@ -213,7 +267,7 @@
 
         #canvas {
             max-width: 100%;
-            border: 3px solid #8b4513;
+            border: 3px solid #386641;
             border-radius: 15px;
             display: block;
             margin: 20px auto;
@@ -246,27 +300,31 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #8b4513, #a0522d);
-            color: white;
-            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+            background: linear-gradient(135deg, #FED16A, #F97A00);
+            color: #386641;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(254, 209, 106, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #a0522d, #8b4513);
+            background: linear-gradient(135deg, #F97A00, #FED16A);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            box-shadow: 0 6px 20px rgba(254, 209, 106, 0.4);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #daa520, #b8860b);
-            color: white;
-            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+            background: linear-gradient(135deg, #FED16A, #F97A00);
+            color: #386641;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(254, 209, 106, 0.3);
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #b8860b, #daa520);
+            background: linear-gradient(135deg, #F97A00, #FED16A);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
+            box-shadow: 0 6px 20px rgba(254, 209, 106, 0.4);
         }
 
         .status {
@@ -338,7 +396,7 @@
         }
 
         .footer a {
-            color: #8b4513;
+            color: #386641;
             text-decoration: none;
         }
 
@@ -350,13 +408,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>✨ Vintage Textshot Generator</h1>
-            <p>Create beautiful quote images with retro mid-century modern flair</p>
+            <h1>TextShot Love</h1>
         </div>
 
         <div class="section">
             <h3>📝 Text Input</h3>
-            <textarea id="mainText" rows="4" placeholder="Enter your inspirational quote or text here...">Make it vintage!</textarea>
+            <textarea id="mainText" rows="4" placeholder="Enter your inspirational quote or text here..."></textarea>
             <input type="text" id="authorText" placeholder="Author or attribution (optional)">
         </div>
 
@@ -409,12 +466,84 @@
             </select>
             <div class="input-group">
                 <label>Text Size:</label>
-                <input type="range" id="textSize" min="20" max="120" value="60">
-                <span id="textSizeValue">60px</span>
+                <input type="range" id="textSize" min="20" max="160" value="80">
+                <span id="textSizeValue">80px</span>
             </div>
             <div class="input-group">
                 <label>Text Color:</label>
                 <input type="color" id="textColor" value="#2c1810">
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎨 Background Pattern</h3>
+            <div class="input-group">
+                <label>Background:</label>
+                <input type="color" id="patternBgColor" value="#FFF4A4">
+            </div>
+            <div class="input-group">
+                <label>Pattern Color:</label>
+                <input type="color" id="patternFgColor" value="#386641">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: 500; color: #555; margin-bottom: 8px; display: block;">Color Presets:</label>
+                <div class="color-presets">
+                    <div class="color-preset" onclick="applyColorPreset('#9ECAD6', '#748DAE')" title="Ocean Breeze">
+                        <div class="preset-bg" style="background: #9ECAD6;"></div>
+                        <div class="preset-fg" style="background: #748DAE;"></div>
+                    </div>
+                    <div class="color-preset" onclick="applyColorPreset('#EAC8A6', '#DC3C22')" title="Warm Earth">
+                        <div class="preset-bg" style="background: #EAC8A6;"></div>
+                        <div class="preset-fg" style="background: #DC3C22;"></div>
+                    </div>
+                    <div class="color-preset" onclick="applyColorPreset('#00809D', '#FCF8DD')" title="Deep Sea">
+                        <div class="preset-bg" style="background: #00809D;"></div>
+                        <div class="preset-fg" style="background: #FCF8DD;"></div>
+                    </div>
+                    <div class="color-preset" onclick="applyColorPreset('#932F67', '#D92C54')" title="Bold Berry">
+                        <div class="preset-bg" style="background: #932F67;"></div>
+                        <div class="preset-fg" style="background: #D92C54;"></div>
+                    </div>
+                    <div class="color-preset" onclick="applyColorPreset('#789DBC', '#FFE3E3')" title="Soft Sky">
+                        <div class="preset-bg" style="background: #789DBC;"></div>
+                        <div class="preset-fg" style="background: #FFE3E3;"></div>
+                    </div>
+                    <div class="color-preset" onclick="applyColorPreset('#B7E0FF', '#FFF5CD')" title="Light Dreams">
+                        <div class="preset-bg" style="background: #B7E0FF;"></div>
+                        <div class="preset-fg" style="background: #FFF5CD;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pattern-grid" id="patternGrid"></div>
+        </div>
+
+        <div class="section">
+            <h3>🖼️ Frame Options</h3>
+            <div class="input-group">
+                <label>
+                    <input type="checkbox" id="enableBorder" style="width: auto; margin-right: 10px;">
+                    Add Border
+                </label>
+            </div>
+            <div class="input-group">
+                <label>Border Width:</label>
+                <input type="range" id="borderWidth" min="5" max="50" value="10" disabled>
+                <span id="borderWidthValue">10px</span>
+            </div>
+            <div class="input-group">
+                <label>Border Color:</label>
+                <input type="color" id="borderColor" value="#386641" disabled>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input type="checkbox" id="enableRoundedCorners" style="width: auto; margin-right: 10px;">
+                    Rounded Corners
+                </label>
+            </div>
+            <div class="input-group">
+                <label>Corner Radius:</label>
+                <input type="range" id="cornerRadius" min="10" max="100" value="30" disabled>
+                <span id="cornerRadiusValue">30px</span>
             </div>
         </div>
 
@@ -437,8 +566,8 @@
                     <span class="size-name">Facebook/LinkedIn</span>
                     <span class="size-dims">1200 × 628px</span>
                 </button>
-                <button class="size-option" onclick="selectSize(1200, 675, 'Social Media', this)">
-                    <span class="size-name">Social Media</span>
+                <button class="size-option" onclick="selectSize(1200, 675, 'Bluesky/Mastodon', this)">
+                    <span class="size-name">Bluesky/Mastodon</span>
                     <span class="size-dims">1200 × 675px</span>
                 </button>
                 <button class="size-option" onclick="selectSize(1000, 1500, 'Pinterest', this)">
@@ -452,11 +581,6 @@
             </div>
         </div>
 
-        <div class="section">
-            <h3>🎭 Background Pattern</h3>
-            <div class="pattern-grid" id="patternGrid"></div>
-        </div>
-
         <div class="canvas-container">
             <canvas id="canvas" width="800" height="800"></canvas>
         </div>
@@ -467,10 +591,6 @@
         </div>
 
         <div id="status"></div>
-
-        <div class="footer">
-            <p>Create stunning vintage textshots for your social media • Made with ❤️ for the retro aesthetic</p>
-        </div>
     </div>
 
     <script>
@@ -478,6 +598,39 @@
         let currentHeight = 1080;
         let currentSizeName = 'Instagram Square';
         let currentPattern = 0;
+
+        // Shakespeare couplets for random default text
+        const shakespeareCouplets = [
+            "So long as men can breathe or eyes can see,\nSo long lives this, and this gives life to thee.",
+            "For thy sweet love remembered such wealth brings\nThat then I scorn to change my state with kings.",
+            "If this be error and upon me proved,\nI never writ, nor no man ever loved.",
+            "And yet, by heaven, I think my love as rare\nAs any she belied with false compare.",
+            "But if the while I think on thee, dear friend,\nAll losses are restored and sorrows end.",
+            "Shall I compare thee to a summer's day?\nThou art more lovely and more temperate.",
+            "But thy eternal summer shall not fade,\nNor lose possession of that fair thou ow'st.",
+            "When in disgrace with fortune and men's eyes\nI all alone beweep my outcast state",
+            "Love is not love which alters when it alteration finds,\nOr bends with the remover to remove",
+            "My mistress' eyes are nothing like the sun;\nCoral is far more red than her lips' red",
+            "Good night, good night! Parting is such sweet sorrow\nThat I shall say good night till it be morrow",
+            "This above all: to thine own self be true,\nAnd it must follow, as the night the day",
+            "The course of true love never did run smooth;\nBut either it was different in blood",
+            "All the world's a stage,\nAnd all the men and women merely players",
+            "If music be the food of love, play on;\nGive me excess of it, that, surfeiting",
+            "To be or not to be, that is the question:\nWhether 'tis nobler in the mind to suffer",
+            "What light through yonder window breaks?\nIt is the east, and Juliet is the sun",
+            "Some are born great, some achieve greatness,\nAnd some have greatness thrust upon 'em",
+            "Now is the winter of our discontent\nMade glorious summer by this son of York",
+            "Double, double toil and trouble;\nFire burn and cauldron bubble",
+            "Fair is foul, and foul is fair:\nHover through the fog and filthy air",
+            "When shall we three meet again\nIn thunder, lightning, or in rain?",
+            "Out, out, brief candle!\nLife's but a walking shadow, a poor player",
+            "We are such stuff as dreams are made on,\nAnd our little life is rounded with a sleep",
+            "Better a witty fool than a foolish wit,\nFor folly that he wisely shows is fit"
+        ];
+
+        function getRandomShakespeareCouplet() {
+            return shakespeareCouplets[Math.floor(Math.random() * shakespeareCouplets.length)];
+        }
 
         const patterns = [
             {name: 'Atomic Starburst', type: 'starburst', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
@@ -503,10 +656,13 @@
         ];
 
         function init() {
+            // Set random Shakespeare couplet as default text
+            document.getElementById('mainText').value = getRandomShakespeareCouplet();
+            
             createPatternButtons();
             updateCanvas();
             
-            // Event listeners
+            // Event listeners for existing controls
             document.getElementById('mainText').addEventListener('input', updateCanvas);
             document.getElementById('authorText').addEventListener('input', updateCanvas);
             document.getElementById('fontSelect').addEventListener('change', updateCanvas);
@@ -515,10 +671,49 @@
                 updateCanvas();
             });
             document.getElementById('textColor').addEventListener('input', updateCanvas);
+            
+            // Event listeners for pattern colors
+            document.getElementById('patternBgColor').addEventListener('input', function() {
+                createPatternButtons(); // Recreate buttons with new colors
+                updateCanvas();
+            });
+            document.getElementById('patternFgColor').addEventListener('input', function() {
+                createPatternButtons(); // Recreate buttons with new colors
+                updateCanvas();
+            });
+            
+            // Event listeners for border controls
+            document.getElementById('enableBorder').addEventListener('change', function() {
+                const borderControls = ['borderWidth', 'borderColor'];
+                borderControls.forEach(id => {
+                    document.getElementById(id).disabled = !this.checked;
+                });
+                updateCanvas();
+            });
+            
+            document.getElementById('borderWidth').addEventListener('input', function() {
+                document.getElementById('borderWidthValue').textContent = this.value + 'px';
+                updateCanvas();
+            });
+            
+            document.getElementById('borderColor').addEventListener('input', updateCanvas);
+            
+            // Event listeners for rounded corners
+            document.getElementById('enableRoundedCorners').addEventListener('change', function() {
+                document.getElementById('cornerRadius').disabled = !this.checked;
+                updateCanvas();
+            });
+            
+            document.getElementById('cornerRadius').addEventListener('input', function() {
+                document.getElementById('cornerRadiusValue').textContent = this.value + 'px';
+                updateCanvas();
+            });
         }
 
         function createPatternButtons() {
             const grid = document.getElementById('patternGrid');
+            grid.innerHTML = ''; // Clear existing buttons
+            
             patterns.forEach((pattern, index) => {
                 const btn = document.createElement('div');
                 btn.className = 'pattern-btn';
@@ -530,8 +725,20 @@
                 canvas.height = 70;
                 const ctx = canvas.getContext('2d');
                 
+                // Get current colors from UI
+                const bgColor = document.getElementById('patternBgColor').value;
+                const fgColor = document.getElementById('patternFgColor').value;
+                
+                // Create custom pattern object with current colors
+                const customPattern = {
+                    ...pattern,
+                    color1: bgColor,
+                    color2: bgColor,
+                    accent: fgColor
+                };
+                
                 // Draw accurate pattern preview
-                drawPatternBackground(ctx, pattern, 70, 70);
+                drawPatternBackground(ctx, customPattern, 70, 70);
                 
                 // Add pattern name tooltip
                 const nameSpan = document.createElement('span');
@@ -543,6 +750,18 @@
                 btn.onclick = () => selectPattern(index);
                 grid.appendChild(btn);
             });
+        }
+
+        function applyColorPreset(bgColor, fgColor) {
+            // Update the color input values
+            document.getElementById('patternBgColor').value = bgColor;
+            document.getElementById('patternFgColor').value = fgColor;
+            
+            // Recreate pattern buttons with new colors
+            createPatternButtons();
+            
+            // Update the main canvas
+            updateCanvas();
         }
 
         function selectPattern(index) {
@@ -571,34 +790,114 @@
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Set display size
-            const maxDisplaySize = 500;
-            const aspectRatio = currentWidth / currentHeight;
-            let displayWidth, displayHeight;
-            
-            if (aspectRatio > 1) {
-                displayWidth = Math.min(maxDisplaySize, currentWidth);
-                displayHeight = displayWidth / aspectRatio;
-            } else {
-                displayHeight = Math.min(maxDisplaySize, currentHeight);
-                displayWidth = displayHeight * aspectRatio;
-            }
-            
-            canvas.style.width = displayWidth + 'px';
-            canvas.style.height = displayHeight + 'px';
+            // Set actual canvas dimensions to export size
             canvas.width = currentWidth;
             canvas.height = currentHeight;
             
-            drawBackground(ctx);
+            // Set display size to show true aspect ratio (no responsive scaling)
+            const baseSize = 300; // Base dimension for display
+            const aspectRatio = currentWidth / currentHeight;
+            let displayWidth, displayHeight;
+            
+            if (aspectRatio >= 1) {
+                // Landscape or square - base the width
+                displayWidth = baseSize;
+                displayHeight = baseSize / aspectRatio;
+            } else {
+                // Portrait - base the height
+                displayHeight = baseSize;
+                displayWidth = baseSize * aspectRatio;
+            }
+            
+            // Apply exact display size via CSS to show true aspect ratio
+            canvas.style.width = displayWidth + 'px';
+            canvas.style.height = displayHeight + 'px';
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, currentWidth, currentHeight);
+            
+            // Get frame settings
+            const enableBorder = document.getElementById('enableBorder').checked;
+            const borderWidth = parseInt(document.getElementById('borderWidth').value);
+            const borderColor = document.getElementById('borderColor').value;
+            const enableRoundedCorners = document.getElementById('enableRoundedCorners').checked;
+            const cornerRadius = parseInt(document.getElementById('cornerRadius').value);
+            
+            // Calculate content area (inside border)
+            const contentX = enableBorder ? borderWidth : 0;
+            const contentY = enableBorder ? borderWidth : 0;
+            const contentWidth = currentWidth - (enableBorder ? borderWidth * 2 : 0);
+            const contentHeight = currentHeight - (enableBorder ? borderWidth * 2 : 0);
+            
+            // Save context for clipping
+            ctx.save();
+            
+            // Create clipping path for rounded corners if enabled
+            if (enableRoundedCorners) {
+                roundedRect(ctx, contentX, contentY, contentWidth, contentHeight, cornerRadius);
+                ctx.clip();
+            }
+            
+            // Draw background and pattern within the clipped area
+            drawBackground(ctx, contentX, contentY, contentWidth, contentHeight);
             drawText(ctx);
+            
+            // Restore context
+            ctx.restore();
+            
+            // Draw border if enabled
+            if (enableBorder) {
+                ctx.strokeStyle = borderColor;
+                ctx.lineWidth = borderWidth;
+                
+                if (enableRoundedCorners) {
+                    roundedRect(ctx, borderWidth/2, borderWidth/2, currentWidth - borderWidth, currentHeight - borderWidth, cornerRadius);
+                    ctx.stroke();
+                } else {
+                    ctx.strokeRect(borderWidth/2, borderWidth/2, currentWidth - borderWidth, currentHeight - borderWidth);
+                }
+            }
         }
 
-        function drawBackground(ctx) {
+        // Helper function to create rounded rectangle path
+        function roundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        function drawBackground(ctx, x = 0, y = 0, width = currentWidth, height = currentHeight) {
             const pattern = patterns[currentPattern];
-            drawPatternBackground(ctx, pattern, currentWidth, currentHeight);
+            
+            // Get current colors from UI
+            const bgColor = document.getElementById('patternBgColor').value;
+            const fgColor = document.getElementById('patternFgColor').value;
+            
+            // Create custom pattern object with current colors
+            const customPattern = {
+                ...pattern,
+                color1: bgColor,
+                color2: bgColor,
+                accent: fgColor
+            };
+            
+            drawPatternBackground(ctx, customPattern, width, height, x, y);
         }
 
-        function drawPatternBackground(ctx, pattern, width, height) {
+        function drawPatternBackground(ctx, pattern, width, height, offsetX = 0, offsetY = 0) {
+            ctx.save();
+            
+            // Translate to the offset position
+            ctx.translate(offsetX, offsetY);
+            
             // Base gradient background
             const gradient = ctx.createLinearGradient(0, 0, width, height);
             gradient.addColorStop(0, pattern.color1);
@@ -683,6 +982,7 @@
             }
             
             ctx.globalAlpha = 1;
+            ctx.restore();
         }
 
         // Pattern drawing functions with proper scaling
@@ -1057,11 +1357,21 @@
         }
 
         function drawText(ctx) {
-            const mainText = document.getElementById('mainText').value || 'Enter your text here';
+            const mainText = document.getElementById('mainText').value || getRandomShakespeareCouplet();
             const author = document.getElementById('authorText').value;
             const fontSize = parseInt(document.getElementById('textSize').value);
             const fontFamily = document.getElementById('fontSelect').value;
             const textColor = document.getElementById('textColor').value;
+            
+            // Get frame settings to calculate content area
+            const enableBorder = document.getElementById('enableBorder').checked;
+            const borderWidth = parseInt(document.getElementById('borderWidth').value);
+            
+            // Calculate content area (inside border)
+            const contentX = enableBorder ? borderWidth : 0;
+            const contentY = enableBorder ? borderWidth : 0;
+            const contentWidth = currentWidth - (enableBorder ? borderWidth * 2 : 0);
+            const contentHeight = currentHeight - (enableBorder ? borderWidth * 2 : 0);
             
             // Text styling
             ctx.fillStyle = textColor;
@@ -1074,25 +1384,46 @@
             
             // Main text
             ctx.font = `${fontSize}px ${fontFamily}`;
-            const lines = wrapText(ctx, mainText, currentWidth * 0.85);
+            const lines = wrapTextWithLineBreaks(ctx, mainText, contentWidth * 0.85);
             const lineHeight = fontSize * 1.3;
             const totalTextHeight = lines.length * lineHeight + (author ? fontSize * 0.7 + 20 : 0);
             
-            let startY = (currentHeight - totalTextHeight) / 2;
+            let startY = contentY + (contentHeight - totalTextHeight) / 2;
+            let centerX = contentX + contentWidth / 2;
             
             // Draw main text lines
             lines.forEach((line, index) => {
-                ctx.fillText(line, currentWidth / 2, startY + (index * lineHeight) + fontSize / 2);
+                ctx.fillText(line, centerX, startY + (index * lineHeight) + fontSize / 2);
             });
             
             // Draw author
             if (author) {
                 ctx.font = `italic ${fontSize * 0.7}px ${fontFamily}`;
-                ctx.fillText('— ' + author, currentWidth / 2, startY + totalTextHeight - fontSize * 0.35);
+                ctx.fillText('— ' + author, centerX, startY + totalTextHeight - fontSize * 0.35);
             }
             
             // Reset shadow
             ctx.shadowColor = 'transparent';
+        }
+
+        function wrapTextWithLineBreaks(ctx, text, maxWidth) {
+            // First split by explicit line breaks
+            const paragraphs = text.split('\n');
+            const allLines = [];
+            
+            // Process each paragraph separately
+            paragraphs.forEach(paragraph => {
+                if (paragraph.trim() === '') {
+                    // Handle empty lines (line breaks)
+                    allLines.push('');
+                } else {
+                    // Apply word wrapping to each paragraph
+                    const wrappedLines = wrapText(ctx, paragraph, maxWidth);
+                    allLines.push(...wrappedLines);
+                }
+            });
+            
+            return allLines;
         }
 
         function wrapText(ctx, text, maxWidth) {
@@ -1119,7 +1450,7 @@
         function downloadImage() {
             const canvas = document.getElementById('canvas');
             const link = document.createElement('a');
-            const filename = `textshot-${currentSizeName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
+            const filename = `textshot-love-${currentSizeName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
             
             // Create high-quality image
             const tempCanvas = document.createElement('canvas');
@@ -1141,44 +1472,70 @@
 
         function copyImage() {
             const canvas = document.getElementById('canvas');
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             
-            if (isMobile) {
-                if (navigator.share) {
-                    canvas.toBlob(blob => {
-                        const file = new File([blob], 'vintage-textshot.png', { type: 'image/png' });
-                        
-                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                            navigator.share({
-                                title: 'Vintage Textshot',
-                                text: 'Check out this vintage quote image!',
-                                files: [file]
-                            }).then(() => {
-                                showStatus('📱 Shared successfully!', 'success');
-                            }).catch(() => {
-                                showStatus('📱 On mobile: Save the image using the download button!', 'success');
-                            });
-                        } else {
-                            showStatus('📱 On mobile: Save the image using the download button!', 'success');
-                        }
-                    });
-                } else {
-                    showStatus('📱 On mobile: Save the image using the download button!', 'success');
-                }
-            } else {
-                // Desktop clipboard
-                if (navigator.clipboard && navigator.clipboard.write) {
-                    canvas.toBlob(blob => {
-                        const item = new ClipboardItem({'image/png': blob});
-                        navigator.clipboard.write([item]).then(() => {
-                            showStatus('📋 Image copied to clipboard!', 'success');
-                        }).catch(() => {
-                            showStatus('❌ Clipboard copy failed - use download instead', 'error');
+            // Try Web Share API first (works on mobile and some desktop browsers)
+            if (navigator.share) {
+                canvas.toBlob(blob => {
+                    const file = new File([blob], 'textshot-love.png', { type: 'image/png' });
+                    
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            title: 'TextShot Love',
+                            text: 'Check out this beautiful quote image I created!',
+                            files: [file]
+                        }).then(() => {
+                            showStatus('🎉 Shared successfully!', 'success');
+                        }).catch((error) => {
+                            console.log('Share failed:', error);
+                            // Fallback to clipboard
+                            tryClipboardCopy(canvas);
                         });
+                    } else {
+                        // Fallback to clipboard
+                        tryClipboardCopy(canvas);
+                    }
+                });
+            } else {
+                // Fallback to clipboard for browsers without Web Share API
+                tryClipboardCopy(canvas);
+            }
+        }
+
+        function tryClipboardCopy(canvas) {
+            // Try modern Clipboard API
+            if (navigator.clipboard && navigator.clipboard.write) {
+                canvas.toBlob(blob => {
+                    const item = new ClipboardItem({'image/png': blob});
+                    navigator.clipboard.write([item]).then(() => {
+                        showStatus('📋 Image copied to clipboard!', 'success');
+                    }).catch((error) => {
+                        console.log('Clipboard write failed:', error);
+                        // Final fallback - copy image data URL
+                        fallbackCopyMethod(canvas);
                     });
-                } else {
-                    showStatus('❌ Clipboard not supported - use download instead', 'error');
-                }
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyMethod(canvas);
+            }
+        }
+
+        function fallbackCopyMethod(canvas) {
+            // For browsers that don't support modern clipboard
+            try {
+                // Create a temporary text area with the data URL
+                const dataURL = canvas.toDataURL('image/png');
+                const textArea = document.createElement('textarea');
+                textArea.value = dataURL;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showStatus('📋 Image data copied! Paste into image editor or messaging app.', 'success');
+            } catch (error) {
+                console.log('Fallback copy failed:', error);
+                // Ultimate fallback - offer download
+                showStatus('💡 Copy not supported. Use the Download button instead!', 'error');
             }
         }
 
