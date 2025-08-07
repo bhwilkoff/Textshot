@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Textshot Generator</title>
+    <!-- Google Fonts for Vintage Aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Oswald:wght@300;400;600&family=Bebas+Neue&family=Crimson+Text:ital@0;1&family=Libre+Baskerville:ital@0;1&family=Merriweather:wght@300;400;700&family=Lora:ital@0;1&family=Old+Standard+TT:ital@0;1&family=Vollkorn:wght@400;600&family=Bitter:wght@400;600&family=Alegreya:ital@0;1&family=Cormorant+Garamond:ital@0;1&family=EB+Garamond:ital@0;1&family=Source+Sans+Pro:wght@300;400;600&family=Montserrat:wght@300;400;600&family=Roboto+Slab:wght@300;400;600&family=Special+Elite&family=Major+Mono+Display&family=Space+Mono&family=Fredoka+One&family=Righteous&family=Anton&family=Shadows+Into+Light&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -361,36 +363,49 @@
         <div class="section">
             <h3>🎨 Text Settings</h3>
             <select id="fontSelect">
-                <option value="Georgia, serif">Georgia (Classic Serif)</option>
+                <!-- Classic Vintage Serifs -->
+                <option value="'Playfair Display', Georgia, serif">Playfair Display (Elegant Vintage)</option>
+                <option value="'Crimson Text', Georgia, serif">Crimson Text (Classic Book)</option>
+                <option value="'Libre Baskerville', Georgia, serif">Libre Baskerville (18th Century)</option>
+                <option value="'Merriweather', Georgia, serif">Merriweather (Friendly Readable)</option>
+                <option value="'Lora', Georgia, serif">Lora (Contemporary Classic)</option>
+                <option value="'Old Standard TT', 'Times New Roman', serif">Old Standard (Imperial Russian)</option>
+                <option value="'Vollkorn', Georgia, serif">Vollkorn (Quiet & Modest)</option>
+                <option value="'Bitter', Georgia, serif">Bitter (Sharp & Precise)</option>
+                <option value="'Alegreya', Georgia, serif">Alegreya (Humanist)</option>
+                <option value="'Cormorant Garamond', Garamond, serif">Cormorant Garamond (Renaissance)</option>
+                <option value="'EB Garamond', Garamond, serif">EB Garamond (Classic French)</option>
+                
+                <!-- Mid-Century Sans Serifs -->
+                <option value="'Oswald', 'Arial Narrow', sans-serif">Oswald (Modern Condensed)</option>
+                <option value="'Source Sans Pro', Arial, sans-serif">Source Sans Pro (Clean & Simple)</option>
+                <option value="'Montserrat', Helvetica, sans-serif">Montserrat (Geometric Urban)</option>
+                <option value="'Bebas Neue', Impact, sans-serif">Bebas Neue (Bold Display)</option>
+                <option value="'Righteous', Arial, sans-serif">Righteous (Vintage Signage)</option>
+                <option value="'Anton', Impact, sans-serif">Anton (Strong Impact)</option>
+                <option value="'Fredoka One', Arial, sans-serif">Fredoka One (Friendly Bold)</option>
+                
+                <!-- Slab Serifs (Mid-Century Style) -->
+                <option value="'Roboto Slab', Georgia, serif">Roboto Slab (Modern Mechanical)</option>
+                
+                <!-- Typewriter & Monospace -->
+                <option value="'Special Elite', 'Courier New', monospace">Special Elite (Vintage Typewriter)</option>
+                <option value="'Major Mono Display', 'Courier New', monospace">Major Mono Display (Bold Mono)</option>
+                <option value="'Space Mono', 'Courier New', monospace">Space Mono (Retro Future)</option>
+                <option value="'Courier New', Courier, monospace">Courier New (Classic Typewriter)</option>
+                
+                <!-- Handwritten & Script -->
+                <option value="'Shadows Into Light', cursive">Shadows Into Light (Casual Script)</option>
+                <option value="'Caveat', cursive">Caveat (Personal Handwriting)</option>
+                
+                <!-- Web Safe Fallbacks -->
+                <option value="Georgia, serif">Georgia (Web Safe Serif)</option>
                 <option value="'Times New Roman', Times, serif">Times New Roman (Traditional)</option>
-                <option value="'Book Antiqua', 'Palatino Linotype', serif">Book Antiqua (Vintage Elegant)</option>
-                <option value="'Palatino Linotype', Palatino, serif">Palatino (Mid-Century Serif)</option>
-                <option value="'Century Schoolbook', serif">Century Schoolbook (Retro Academic)</option>
-                <option value="'Bookman Old Style', serif">Bookman Old Style (Classic Book)</option>
-                <option value="Garamond, serif">Garamond (Renaissance Classic)</option>
-                <option value="'Minion Pro', serif">Minion Pro (Professional Serif)</option>
-                <option value="Baskerville, serif">Baskerville (18th Century)</option>
-                <option value="'Hoefler Text', serif">Hoefler Text (Editorial Style)</option>
-                <option value="'Big Caslon', serif">Big Caslon (Display Serif)</option>
-                <option value="'Courier New', Courier, monospace">Courier New (Typewriter)</option>
-                <option value="Monaco, 'Lucida Console', monospace">Monaco (Vintage Terminal)</option>
-                <option value="'Andale Mono', monospace">Andale Mono (Clean Typewriter)</option>
-                <option value="Consolas, monospace">Consolas (Modern Mono)</option>
-                <option value="Helvetica, Arial, sans-serif">Helvetica (Swiss Modern)</option>
-                <option value="'Helvetica Neue', Helvetica, sans-serif">Helvetica Neue (Contemporary)</option>
-                <option value="'Avenir Next', Avenir, sans-serif">Avenir (Geometric Sans)</option>
-                <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic (Industrial)</option>
-                <option value="'Arial Black', Arial, sans-serif">Arial Black (Bold Display)</option>
-                <option value="Impact, 'Arial Black', sans-serif">Impact (Strong Display)</option>
-                <option value="'Trebuchet MS', sans-serif">Trebuchet MS (Humanist Sans)</option>
+                <option value="Arial, Helvetica, sans-serif">Arial (Clean Sans-Serif)</option>
+                <option value="Helvetica, Arial, sans-serif">Helvetica (Swiss Design)</option>
                 <option value="Verdana, Geneva, sans-serif">Verdana (Screen Optimized)</option>
-                <option value="'Gill Sans', 'Gill Sans MT', sans-serif">Gill Sans (British Classic)</option>
-                <option value="Futura, 'Century Gothic', sans-serif">Futura (Bauhaus Geometric)</option>
-                <option value="'Century Gothic', 'Apple Gothic', sans-serif">Century Gothic (Art Deco)</option>
-                <option value="'Optima', sans-serif">Optima (Humanist Classic)</option>
-                <option value="'Copperplate Gothic', fantasy">Copperplate Gothic (Vintage Display)</option>
-                <option value="'Brush Script MT', cursive">Brush Script (Hand Lettered)</option>
-                <option value="'American Typewriter', serif">American Typewriter (Vintage Slab)</option>
+                <option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet MS (Humanist)</option>
+                <option value="Impact, 'Arial Black', sans-serif">Impact (Bold Display)</option>
             </select>
             <div class="input-group">
                 <label>Text Size:</label>
