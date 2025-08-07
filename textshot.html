@@ -1,669 +1,1185 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Textshot Generator</title>
-    <!-- Google Fonts for Vintage/Hipster Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Crimson+Text:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Old+Standard+TT:wght@400;700&family=EB+Garamond:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Abril+Fatface&family=Amatic+SC:wght@400;700&family=Fredoka+One&family=Lobster&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&family=Righteous&family=Alfa+Slab+One&family=Bebas+Neue&family=Fjalla+One&family=Anton&family=Russo+One&family=Monoton&family=Creepster&family=Bungee&family=Fredericka+the+Great&family=Special+Elite&family=Courier+Prime&family=Major+Mono+Display&family=VT323&display=swap" rel="stylesheet">
     <style>
-        /* Ensure fonts load properly */
         * {
-            font-display: swap;
+            box-sizing: border-box;
         }
 
-```
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #d4a574, #c49464);
-        margin: 0;
-        padding: 20px;
-        min-height: 100vh;
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #d4a574, #c49464);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
 
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-        background: white;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
-    .header {
-        text-align: center;
-        background: #8b4513;
-        color: white;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
 
-    .section {
-        margin-bottom: 20px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #f9f9f9;
-    }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
 
-    .section h3 {
-        margin-top: 0;
-        color: #8b4513;
-    }
+        .header p {
+            margin: 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
 
-    textarea, input, select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            background: #fafafa;
+            transition: border-color 0.3s ease;
+        }
 
-    .size-option {
-        display: block;
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 8px;
-        border: 2px solid #ddd;
-        background: white;
-        border-radius: 8px;
-        cursor: pointer;
-        text-align: left;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
+        .section:hover {
+            border-color: #d4a574;
+        }
 
-    .size-option:hover {
-        border-color: #8b4513;
-        background: #f0f0f0;
-    }
+        .section h3 {
+            margin: 0 0 15px 0;
+            color: #8b4513;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
 
-    .size-option.selected {
-        border-color: #8b4513;
-        background: #8b4513;
-        color: white;
-    }
+        textarea, input[type="text"], input[type="color"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .size-name {
-        font-weight: bold;
-        display: block;
-    }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #8b4513;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
 
-    .size-dims {
-        font-size: 14px;
-        opacity: 0.8;
-    }
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
 
-    .pattern-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
-        gap: 8px;
-        margin-top: 10px;
-        max-height: 200px;
-        overflow-y: auto;
-    }
+        .input-group label {
+            font-weight: 500;
+            color: #555;
+            min-width: 100px;
+        }
 
-    .pattern-btn {
-        width: 45px;
-        height: 45px;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        overflow: hidden;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        .input-group input[type="range"] {
+            flex: 1;
+            margin: 0;
+        }
 
-    .pattern-btn canvas {
-        width: 100%;
-        height: 100%;
-        border-radius: 6px;
-        display: block;
-    }
+        .input-group input[type="color"] {
+            width: 60px;
+            height: 40px;
+            padding: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-    .pattern-btn.selected {
-        border-color: #8b4513;
-        transform: scale(1.1);
-    }
+        .size-option {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
 
-    canvas {
-        max-width: 100%;
-        border: 2px solid #8b4513;
-        border-radius: 10px;
-        display: block;
-        margin: 20px auto;
-    }
+        .size-option:hover {
+            border-color: #8b4513;
+            background: #f8f8f8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-    .buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-top: 20px;
-    }
+        .size-option.selected {
+            border-color: #8b4513;
+            background: #8b4513;
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
 
-    button {
-        padding: 15px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        font-weight: bold;
-    }
+        .size-name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
 
-    .btn-primary {
-        background: #8b4513;
-        color: white;
-    }
+        .size-dims {
+            font-size: 14px;
+            opacity: 0.8;
+        }
 
-    .btn-secondary {
-        background: #daa520;
-        color: black;
-    }
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
 
-    .status {
-        text-align: center;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 5px;
-        font-size: 14px;
-        line-height: 1.4;
-    }
+        .pattern-btn {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: white;
+        }
 
-    .status.success {
-        background: #d4edda;
-        color: #155724;
-    }
+        .pattern-btn:hover {
+            border-color: #8b4513;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
 
-    .status.error {
-        background: #f8d7da;
-        color: #721c24;
-    }
-</style>
-```
+        .pattern-btn.selected {
+            border-color: #8b4513;
+            border-width: 4px;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
 
+        .pattern-btn canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .pattern-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 10px;
+            padding: 4px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pattern-btn:hover .pattern-name {
+            opacity: 1;
+        }
+
+        #canvas {
+            max-width: 100%;
+            border: 3px solid #8b4513;
+            border-radius: 15px;
+            display: block;
+            margin: 20px auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .canvas-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #a0522d, #8b4513);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #daa520, #b8860b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #b8860b, #daa520);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
+        }
+
+        .status {
+            text-align: center;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .pattern-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+                gap: 8px;
+            }
+            
+            .pattern-btn {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .input-group label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #8b4513;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>✨ Vintage Textshot Generator</h1>
-            <p>Create beautiful quote images with hipster flair</p>
+            <p>Create beautiful quote images with retro mid-century modern flair</p>
         </div>
 
-```
-    <div class="section">
-        <h3>Text Input</h3>
-        <textarea id="mainText" rows="4" placeholder="Enter your text or quote here...">Make it vintage!</textarea>
-        <input type="text" id="authorText" placeholder="Author (optional)">
-    </div>
+        <div class="section">
+            <h3>📝 Text Input</h3>
+            <textarea id="mainText" rows="4" placeholder="Enter your inspirational quote or text here...">Make it vintage!</textarea>
+            <input type="text" id="authorText" placeholder="Author or attribution (optional)">
+        </div>
 
-    <div class="section">
-        <h3>Text Settings</h3>
-        <select id="fontSelect">
-            <option value="'Playfair Display', Georgia, serif">Playfair Display (Elegant Serif)</option>
-            <option value="'EB Garamond', Georgia, serif">EB Garamond (Classic Renaissance)</option>
-            <option value="'Cormorant Garamond', Georgia, serif">Cormorant Garamond (Refined)</option>
-            <option value="'Libre Baskerville', Georgia, serif">Libre Baskerville (Colonial)</option>
-            <option value="'Old Standard TT', 'Times New Roman', serif">Old Standard (Academic)</option>
-            <option value="'Crimson Text', Georgia, serif">Crimson Text (Literary)</option>
-            <option value="Lora, Georgia, serif">Lora (Modern Classic)</option>
-            <option value="Merriweather, Georgia, serif">Merriweather (Readable Serif)</option>
-            <option value="'Abril Fatface', Georgia, serif">Abril Fatface (Magazine Display)</option>
-            <option value="'Alfa Slab One', Georgia, serif">Alfa Slab One (Bold Slab)</option>
-            <option value="Georgia, serif">Georgia (Web Classic)</option>
-            <option value="'Times New Roman', serif">Times New Roman (Traditional)</option>
-            <option value="Oswald, Arial, sans-serif">Oswald (Geometric Sans)</option>
-            <option value="'Bebas Neue', Arial, sans-serif">Bebas Neue (Modern Condensed)</option>
-            <option value="'Fjalla One', Arial, sans-serif">Fjalla One (Nordic Sans)</option>
-            <option value="Anton, Arial, sans-serif">Anton (Bold Modern)</option>
-            <option value="'Russo One', Arial, sans-serif">Russo One (Strong Sans)</option>
-            <option value="Righteous, Arial, sans-serif">Righteous (Retro Sans)</option>
-            <option value="'Amatic SC', Arial, sans-serif">Amatic SC (Hand Drawn)</option>
-            <option value="'Fredoka One', Arial, sans-serif">Fredoka One (Playful)</option>
-            <option value="Lobster, cursive">Lobster (Retro Script)</option>
-            <option value="'Dancing Script', cursive">Dancing Script (Elegant Script)</option>
-            <option value="'Great Vibes', cursive">Great Vibes (Flowing Script)</option>
-            <option value="Pacifico, cursive">Pacifico (Casual Script)</option>
-            <option value="'Fredericka the Great', cursive">Fredericka (Ornate Script)</option>
-            <option value="'Special Elite', 'Courier New', monospace">Special Elite (Typewriter)</option>
-            <option value="'Courier Prime', 'Courier New', monospace">Courier Prime (Clean Type)</option>
-            <option value="'Major Mono Display', 'Courier New', monospace">Major Mono (Display Type)</option>
-            <option value="VT323, 'Courier New', monospace">VT323 (Terminal/Retro)</option>
-            <option value="'Courier New', monospace">Courier New (Classic Type)</option>
-            <option value="Monoton, cursive">Monoton (Art Deco)</option>
-            <option value="Creepster, cursive">Creepster (Horror Vintage)</option>
-            <option value="Bungee, cursive">Bungee (Urban Display)</option>
-            <option value="Impact, sans-serif">Impact (Bold Display)</option>
-        </select>
-        <label>Text Size: <input type="range" id="textSize" min="20" max="100" value="50"></label>
-        <label>Text Color: <input type="color" id="textColor" value="#2c1810"></label>
-    </div>
+        <div class="section">
+            <h3>🎨 Text Settings</h3>
+            <select id="fontSelect">
+                <option value="Georgia, serif">Georgia (Classic Serif)</option>
+                <option value="'Times New Roman', Times, serif">Times New Roman (Traditional)</option>
+                <option value="'Book Antiqua', 'Palatino Linotype', serif">Book Antiqua (Vintage Elegant)</option>
+                <option value="'Palatino Linotype', Palatino, serif">Palatino (Mid-Century Serif)</option>
+                <option value="'Century Schoolbook', serif">Century Schoolbook (Retro Academic)</option>
+                <option value="'Bookman Old Style', serif">Bookman Old Style (Classic Book)</option>
+                <option value="Garamond, serif">Garamond (Renaissance Classic)</option>
+                <option value="'Minion Pro', serif">Minion Pro (Professional Serif)</option>
+                <option value="Baskerville, serif">Baskerville (18th Century)</option>
+                <option value="'Hoefler Text', serif">Hoefler Text (Editorial Style)</option>
+                <option value="'Big Caslon', serif">Big Caslon (Display Serif)</option>
+                <option value="'Courier New', Courier, monospace">Courier New (Typewriter)</option>
+                <option value="Monaco, 'Lucida Console', monospace">Monaco (Vintage Terminal)</option>
+                <option value="'Andale Mono', monospace">Andale Mono (Clean Typewriter)</option>
+                <option value="Consolas, monospace">Consolas (Modern Mono)</option>
+                <option value="Helvetica, Arial, sans-serif">Helvetica (Swiss Modern)</option>
+                <option value="'Helvetica Neue', Helvetica, sans-serif">Helvetica Neue (Contemporary)</option>
+                <option value="'Avenir Next', Avenir, sans-serif">Avenir (Geometric Sans)</option>
+                <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic (Industrial)</option>
+                <option value="'Arial Black', Arial, sans-serif">Arial Black (Bold Display)</option>
+                <option value="Impact, 'Arial Black', sans-serif">Impact (Strong Display)</option>
+                <option value="'Trebuchet MS', sans-serif">Trebuchet MS (Humanist Sans)</option>
+                <option value="Verdana, Geneva, sans-serif">Verdana (Screen Optimized)</option>
+                <option value="'Gill Sans', 'Gill Sans MT', sans-serif">Gill Sans (British Classic)</option>
+                <option value="Futura, 'Century Gothic', sans-serif">Futura (Bauhaus Geometric)</option>
+                <option value="'Century Gothic', 'Apple Gothic', sans-serif">Century Gothic (Art Deco)</option>
+                <option value="'Optima', sans-serif">Optima (Humanist Classic)</option>
+                <option value="'Copperplate Gothic', fantasy">Copperplate Gothic (Vintage Display)</option>
+                <option value="'Brush Script MT', cursive">Brush Script (Hand Lettered)</option>
+                <option value="'American Typewriter', serif">American Typewriter (Vintage Slab)</option>
+            </select>
+            <div class="input-group">
+                <label>Text Size:</label>
+                <input type="range" id="textSize" min="20" max="120" value="60">
+                <span id="textSizeValue">60px</span>
+            </div>
+            <div class="input-group">
+                <label>Text Color:</label>
+                <input type="color" id="textColor" value="#2c1810">
+            </div>
+        </div>
 
-    <div class="section">
-        <h3>Export Size</h3>
-        <div id="sizeOptions">
-            <button class="size-option selected" onclick="selectSize(1080, 1080, 'Instagram Square', this)">
-                <span class="size-name">Instagram Square</span>
-                <span class="size-dims">1080 × 1080px</span>
-            </button>
-            <button class="size-option" onclick="selectSize(1080, 1350, 'Instagram Portrait', this)">
-                <span class="size-name">Instagram Portrait</span>
-                <span class="size-dims">1080 × 1350px</span>
-            </button>
-            <button class="size-option" onclick="selectSize(1080, 1920, 'Instagram Stories', this)">
-                <span class="size-name">Instagram Stories</span>
-                <span class="size-dims">1080 × 1920px</span>
-            </button>
-            <button class="size-option" onclick="selectSize(1200, 628, 'Facebook/LinkedIn', this)">
-                <span class="size-name">Facebook/LinkedIn</span>
-                <span class="size-dims">1200 × 628px</span>
-            </button>
-            <button class="size-option" onclick="selectSize(1200, 675, 'Bluesky/Social', this)">
-                <span class="size-name">Bluesky/Social</span>
-                <span class="size-dims">1200 × 675px</span>
-            </button>
-            <button class="size-option" onclick="selectSize(1000, 1500, 'Pinterest', this)">
-                <span class="size-name">Pinterest</span>
-                <span class="size-dims">1000 × 1500px</span>
-            </button>
-            <button class="size-option" onclick="selectSize(2000, 2000, 'High Resolution', this)">
-                <span class="size-name">High Resolution</span>
-                <span class="size-dims">2000 × 2000px</span>
-            </button>
+        <div class="section">
+            <h3>📱 Export Size</h3>
+            <div id="sizeOptions">
+                <button class="size-option selected" onclick="selectSize(1080, 1080, 'Instagram Square', this)">
+                    <span class="size-name">Instagram Square</span>
+                    <span class="size-dims">1080 × 1080px</span>
+                </button>
+                <button class="size-option" onclick="selectSize(1080, 1350, 'Instagram Portrait', this)">
+                    <span class="size-name">Instagram Portrait</span>
+                    <span class="size-dims">1080 × 1350px</span>
+                </button>
+                <button class="size-option" onclick="selectSize(1080, 1920, 'Instagram Stories', this)">
+                    <span class="size-name">Instagram Stories</span>
+                    <span class="size-dims">1080 × 1920px</span>
+                </button>
+                <button class="size-option" onclick="selectSize(1200, 628, 'Facebook/LinkedIn', this)">
+                    <span class="size-name">Facebook/LinkedIn</span>
+                    <span class="size-dims">1200 × 628px</span>
+                </button>
+                <button class="size-option" onclick="selectSize(1200, 675, 'Social Media', this)">
+                    <span class="size-name">Social Media</span>
+                    <span class="size-dims">1200 × 675px</span>
+                </button>
+                <button class="size-option" onclick="selectSize(1000, 1500, 'Pinterest', this)">
+                    <span class="size-name">Pinterest</span>
+                    <span class="size-dims">1000 × 1500px</span>
+                </button>
+                <button class="size-option" onclick="selectSize(2000, 2000, 'High Resolution', this)">
+                    <span class="size-name">High Resolution</span>
+                    <span class="size-dims">2000 × 2000px</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎭 Background Pattern</h3>
+            <div class="pattern-grid" id="patternGrid"></div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="canvas" width="800" height="800"></canvas>
+        </div>
+
+        <div class="buttons">
+            <button class="btn-primary" onclick="downloadImage()">📥 Download Image</button>
+            <button class="btn-secondary" onclick="copyImage()">📋 Share/Copy</button>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="footer">
+            <p>Create stunning vintage textshots for your social media • Made with ❤️ for the retro aesthetic</p>
         </div>
     </div>
 
-    <div class="section">
-        <h3>Background Pattern</h3>
-        <div class="pattern-grid" id="patternGrid"></div>
-    </div>
+    <script>
+        let currentWidth = 1080;
+        let currentHeight = 1080;
+        let currentSizeName = 'Instagram Square';
+        let currentPattern = 0;
 
-    <canvas id="canvas" width="800" height="800"></canvas>
+        const patterns = [
+            {name: 'Atomic Starburst', type: 'starburst', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
+            {name: 'Boomerang Scatter', type: 'boomerang', color1: '#fff8dc', color2: '#deb887', accent: '#cd853f'},
+            {name: 'Atomic Dots', type: 'atomic_dots', color1: '#faf0e6', color2: '#bc8f8f', accent: '#8b4513'},
+            {name: 'Mid-Century Zigzag', type: 'zigzag', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
+            {name: 'Retro Triangles', type: 'triangles', color1: '#fff8dc', color2: '#d2b48c', accent: '#a0522d'},
+            {name: 'Diamond Grid', type: 'diamond', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
+            {name: 'Geometric Waves', type: 'waves', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
+            {name: 'Retro Stripes', type: 'retro_stripes', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
+            {name: 'Color Blocks', type: 'blocks', color1: '#ffe4b5', color2: '#cd853f', accent: '#8b4513'},
+            {name: 'Sunburst Radial', type: 'sunburst', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
+            {name: 'Overlapping Circles', type: 'circles', color1: '#ffe4b5', color2: '#cd853f', accent: '#b8860b'},
+            {name: 'Angular Shapes', type: 'angular', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
+            {name: 'Curved Lines', type: 'curves', color1: '#faf0e6', color2: '#bc8f8f', accent: '#8b7d6b'},
+            {name: 'Retro Hexagons', type: 'hexagons', color1: '#ffe4b5', color2: '#cd853f', accent: '#8b4513'},
+            {name: 'Organic Shapes', type: 'organic', color1: '#ffe4b5', color2: '#d2b48c', accent: '#a0522d'},
+            {name: 'Atomic Age Mix', type: 'atomic_age', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
+            {name: 'Gold Cross Pattern', type: 'gold_cross', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
+            {name: 'Kidney Bean Shapes', type: 'kidney', color1: '#ffe4b5', color2: '#d2b48c', accent: '#a0522d'},
+            {name: 'Abstract Leaves', type: 'leaves', color1: '#f4e4bc', color2: '#daa520', accent: '#8b6914'},
+            {name: 'Vintage Plus Signs', type: 'crosses', color1: '#fff8dc', color2: '#d2b48c', accent: '#a0522d'}
+        ];
 
-    <div class="buttons">
-        <button class="btn-primary" onclick="downloadImage()">💾 Download Image</button>
-        <button class="btn-secondary" onclick="copyImage()">📱 Share/Copy</button>
-    </div>
-
-    <div class="sharing-note" style="margin-top: 15px; padding: 15px; background: rgba(139, 69, 19, 0.1); border-radius: 8px; border-left: 4px solid #8b4513; font-size: 14px; line-height: 1.4;">
-        <strong>📱 Mobile Usage:</strong><br>
-        • On iPhone/mobile: Use "Share/Copy" to share via Messages, Instagram, etc.<br>
-        • Or download and save to your photos<br>
-        • Take a screenshot if sharing doesn't work<br>
-        <strong>💻 Desktop:</strong><br>
-        • Copy directly to clipboard for easy pasting<br>
-        • Download for high-quality files
-    </div>
-
-    <div id="status"></div>
-</div>
-
-<script>
-    var currentWidth = 1080;
-    var currentHeight = 1080;
-    var currentSizeName = 'Instagram Square';
-    var currentPattern = 0;
-
-    var patterns = [
-        {name: 'Atomic Starburst', type: 'starburst', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
-        {name: 'Boomerang Dreams', type: 'boomerang', color1: '#fff8dc', color2: '#deb887', accent: '#cd853f'},
-        {name: 'Kidney Bean', type: 'kidney', color1: '#ffe4b5', color2: '#d2b48c', accent: '#a0522d'},
-        {name: 'Atomic Dots', type: 'atomic_dots', color1: '#faf0e6', color2: '#bc8f8f', accent: '#8b4513'},
-        {name: 'Mid-Century Zigzag', type: 'zigzag', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
-        {name: 'Overlapping Circles', type: 'circles', color1: '#ffe4b5', color2: '#cd853f', accent: '#b8860b'},
-        {name: 'Angular Geometric', type: 'angular', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
-        {name: 'Sunburst Radial', type: 'sunburst', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
-        {name: 'Retro Triangles', type: 'triangles', color1: '#fff8dc', color2: '#d2b48c', accent: '#a0522d'},
-        {name: 'Abstract Leaves', type: 'leaves', color1: '#f4e4bc', color2: '#daa520', accent: '#8b6914'},
-        {name: 'Color Blocks', type: 'blocks', color1: '#ffe4b5', color2: '#cd853f', accent: '#8b4513'},
-        {name: 'Curved Lines', type: 'curves', color1: '#faf0e6', color2: '#bc8f8f', accent: '#8b7d6b'},
-        {name: 'Atomic Nucleus', type: 'nucleus', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
-        {name: 'Geometric Waves', type: 'waves', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
-        {name: 'Retro Stripes', type: 'retro_stripes', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
-        {name: 'Organic Shapes', type: 'organic', color1: '#ffe4b5', color2: '#d2b48c', accent: '#a0522d'},
-        {name: 'Atomic Age', type: 'atomic_age', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
-        {name: 'Boomerang Scatter', type: 'boomerang_scatter', color1: '#fff8dc', color2: '#deb887', accent: '#cd853f'},
-        {name: 'Diamond Grid', type: 'diamond', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
-        {name: 'Atomic Orbits', type: 'orbits', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
-        {name: 'Retro Hexagons', type: 'hexagons', color1: '#ffe4b5', color2: '#cd853f', accent: '#8b4513'},
-        {name: 'Mid-Century Gold', type: 'gold_pattern', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'}
-    ];
-
-    function init() {
-        createPatternButtons();
-        
-        // Wait for fonts to load before first render
-        setTimeout(function() {
+        function init() {
+            createPatternButtons();
             updateCanvas();
-        }, 500);
-        
-        document.getElementById('mainText').addEventListener('input', updateCanvas);
-        document.getElementById('authorText').addEventListener('input', updateCanvas);
-        document.getElementById('fontSelect').addEventListener('change', function() {
-            // Small delay when changing fonts to ensure they load
-            setTimeout(updateCanvas, 100);
-        });
-        document.getElementById('textSize').addEventListener('input', updateCanvas);
-        document.getElementById('textColor').addEventListener('input', updateCanvas);
-    }
-
-    function createPatternButtons() {
-        var grid = document.getElementById('patternGrid');
-        for (var i = 0; i < patterns.length; i++) {
-            var btn = document.createElement('div');
-            btn.className = 'pattern-btn';
-            if (i === 0) btn.className += ' selected';
             
-            var canvas = document.createElement('canvas');
-            canvas.width = 45;
-            canvas.height = 45;
-            var ctx = canvas.getContext('2d');
-            drawPatternPreview(ctx, patterns[i], 45, 45);
-            
-            btn.appendChild(canvas);
-            btn.onclick = createPatternHandler(i);
-            grid.appendChild(btn);
+            // Event listeners
+            document.getElementById('mainText').addEventListener('input', updateCanvas);
+            document.getElementById('authorText').addEventListener('input', updateCanvas);
+            document.getElementById('fontSelect').addEventListener('change', updateCanvas);
+            document.getElementById('textSize').addEventListener('input', function() {
+                document.getElementById('textSizeValue').textContent = this.value + 'px';
+                updateCanvas();
+            });
+            document.getElementById('textColor').addEventListener('input', updateCanvas);
         }
-    }
 
-    function createPatternHandler(index) {
-        return function() {
-            var buttons = document.querySelectorAll('.pattern-btn');
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove('selected');
-            }
-            this.classList.add('selected');
+        function createPatternButtons() {
+            const grid = document.getElementById('patternGrid');
+            patterns.forEach((pattern, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'pattern-btn';
+                if (index === 0) btn.classList.add('selected');
+                
+                // Create preview canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = 70;
+                canvas.height = 70;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw accurate pattern preview
+                drawPatternBackground(ctx, pattern, 70, 70);
+                
+                // Add pattern name tooltip
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'pattern-name';
+                nameSpan.textContent = pattern.name;
+                
+                btn.appendChild(canvas);
+                btn.appendChild(nameSpan);
+                btn.onclick = () => selectPattern(index);
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectPattern(index) {
+            // Update selection
+            document.querySelectorAll('.pattern-btn').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === index);
+            });
             currentPattern = index;
             updateCanvas();
-        };
-    }
-
-    function drawPatternPreview(ctx, pattern, width, height) {
-        var gradient = ctx.createLinearGradient(0, 0, width, height);
-        gradient.addColorStop(0, pattern.color1);
-        gradient.addColorStop(1, pattern.color2);
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, width, height);
-        
-        ctx.fillStyle = pattern.accent;
-        ctx.strokeStyle = pattern.accent;
-        
-        switch(pattern.type) {
-            case 'starburst':
-                var centerX = width / 2;
-                var centerY = height / 2;
-                var rays = 8;
-                for (var i = 0; i < rays; i++) {
-                    var angle = (i * 2 * Math.PI) / rays;
-                    ctx.globalAlpha = 0.4;
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.lineTo(centerX + Math.cos(angle) * width * 0.4, centerY + Math.sin(angle) * height * 0.4);
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-                break;
-            case 'dots':
-            case 'atomic_dots':
-                for (var i = 0; i < 3; i++) {
-                    var x = 8 + i * 12;
-                    var y = 8 + i * 12;
-                    ctx.globalAlpha = 0.5;
-                    ctx.beginPath();
-                    ctx.arc(x, y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                break;
-            case 'zigzag':
-                ctx.beginPath();
-                ctx.moveTo(0, height/2);
-                for (var x = 0; x < width; x += 8) {
-                    var zigY = height/2 + (x / 8 % 2 === 0 ? 8 : -8);
-                    ctx.lineTo(x, zigY);
-                }
-                ctx.lineWidth = 2;
-                ctx.globalAlpha = 0.4;
-                ctx.stroke();
-                break;
-            case 'retro_stripes':
-                ctx.save();
-                ctx.translate(width / 2, height / 2);
-                ctx.rotate(Math.PI / 6);
-                for (var x = -width; x < width; x += 8) {
-                    ctx.globalAlpha = 0.4;
-                    ctx.fillRect(x, -height, 4, height * 2);
-                }
-                ctx.restore();
-                break;
-            default:
-                for (var i = 0; i < 3; i++) {
-                    ctx.globalAlpha = 0.3;
-                    ctx.beginPath();
-                    ctx.arc(10 + i * 8, 15 + i * 5, 4, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                break;
         }
-        ctx.globalAlpha = 1;
-    }
 
-    function selectSize(width, height, name, element) {
-        currentWidth = width;
-        currentHeight = height;
-        currentSizeName = name;
-        
-        var options = document.querySelectorAll('.size-option');
-        for (var i = 0; i < options.length; i++) {
-            options[i].classList.remove('selected');
+        function selectSize(width, height, name, element) {
+            currentWidth = width;
+            currentHeight = height;
+            currentSizeName = name;
+            
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            updateCanvas();
         }
-        element.classList.add('selected');
-        
-        updateCanvas();
-    }
 
-    function updateCanvas() {
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
-        
-        canvas.width = currentWidth;
-        canvas.height = currentHeight;
-        
-        drawBackground(ctx);
-        drawText(ctx);
-    }
+        function updateCanvas() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set display size
+            const maxDisplaySize = 500;
+            const aspectRatio = currentWidth / currentHeight;
+            let displayWidth, displayHeight;
+            
+            if (aspectRatio > 1) {
+                displayWidth = Math.min(maxDisplaySize, currentWidth);
+                displayHeight = displayWidth / aspectRatio;
+            } else {
+                displayHeight = Math.min(maxDisplaySize, currentHeight);
+                displayWidth = displayHeight * aspectRatio;
+            }
+            
+            canvas.style.width = displayWidth + 'px';
+            canvas.style.height = displayHeight + 'px';
+            canvas.width = currentWidth;
+            canvas.height = currentHeight;
+            
+            drawBackground(ctx);
+            drawText(ctx);
+        }
 
-    function drawBackground(ctx) {
-        var pattern = patterns[currentPattern];
-        var gradient = ctx.createLinearGradient(0, 0, currentWidth, currentHeight);
-        gradient.addColorStop(0, pattern.color1);
-        gradient.addColorStop(1, pattern.color2);
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, currentWidth, currentHeight);
-        
-        // Simple pattern overlay
-        ctx.fillStyle = pattern.accent;
-        ctx.globalAlpha = 0.2;
-        
-        if (pattern.type === 'starburst') {
-            var centerX = currentWidth / 2;
-            var centerY = currentHeight / 2;
-            var rays = 16;
-            for (var i = 0; i < rays; i++) {
-                var angle = (i * 2 * Math.PI) / rays;
+        function drawBackground(ctx) {
+            const pattern = patterns[currentPattern];
+            drawPatternBackground(ctx, pattern, currentWidth, currentHeight);
+        }
+
+        function drawPatternBackground(ctx, pattern, width, height) {
+            // Base gradient background
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, pattern.color1);
+            gradient.addColorStop(0.5, pattern.color2);
+            gradient.addColorStop(1, pattern.color1);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Set pattern style
+            ctx.fillStyle = pattern.accent;
+            ctx.strokeStyle = pattern.accent;
+            ctx.globalAlpha = 0.25;
+            ctx.lineWidth = Math.max(1, width / 400);
+            
+            // Draw the specific pattern
+            switch(pattern.type) {
+                case 'starburst':
+                    drawStarburst(ctx, width, height);
+                    break;
+                case 'boomerang':
+                    drawBoomerangs(ctx, width, height);
+                    break;
+                case 'atomic_dots':
+                    drawAtomicDots(ctx, width, height);
+                    break;
+                case 'zigzag':
+                    drawZigzag(ctx, width, height);
+                    break;
+                case 'triangles':
+                    drawTriangles(ctx, width, height);
+                    break;
+                case 'diamond':
+                    drawDiamondGrid(ctx, width, height);
+                    break;
+                case 'waves':
+                    drawWaves(ctx, width, height);
+                    break;
+                case 'retro_stripes':
+                    drawRetroStripes(ctx, width, height);
+                    break;
+                case 'blocks':
+                    drawColorBlocks(ctx, width, height);
+                    break;
+                case 'sunburst':
+                    drawSunburst(ctx, width, height);
+                    break;
+                case 'circles':
+                    drawCircles(ctx, width, height);
+                    break;
+                case 'angular':
+                    drawAngularShapes(ctx, width, height);
+                    break;
+                case 'curves':
+                    drawCurves(ctx, width, height);
+                    break;
+                case 'hexagons':
+                    drawHexagons(ctx, width, height);
+                    break;
+                case 'organic':
+                    drawOrganicShapes(ctx, width, height);
+                    break;
+                case 'atomic_age':
+                    drawStarburst(ctx, width, height);
+                    ctx.globalAlpha = 0.15;
+                    drawAtomicDots(ctx, width, height);
+                    break;
+                case 'gold_cross':
+                    drawGoldCross(ctx, width, height);
+                    break;
+                case 'kidney':
+                    drawKidneyShapes(ctx, width, height);
+                    break;
+                case 'leaves':
+                    drawLeaves(ctx, width, height);
+                    break;
+                case 'crosses':
+                    drawCrosses(ctx, width, height);
+                    break;
+                default:
+                    drawAtomicDots(ctx, width, height);
+                    break;
+            }
+            
+            ctx.globalAlpha = 1;
+        }
+
+        // Pattern drawing functions with proper scaling
+        function drawStarburst(ctx, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const rays = 16;
+            const maxRadius = Math.min(width, height) * 0.8;
+            
+            for (let i = 0; i < rays; i++) {
+                const angle = (i * 2 * Math.PI) / rays;
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
-                ctx.lineTo(centerX + Math.cos(angle) * currentWidth * 0.4, centerY + Math.sin(angle) * currentHeight * 0.4);
-                ctx.lineWidth = 4;
+                ctx.lineTo(
+                    centerX + Math.cos(angle) * maxRadius,
+                    centerY + Math.sin(angle) * maxRadius
+                );
                 ctx.stroke();
             }
-        } else if (pattern.type === 'dots' || pattern.type === 'atomic_dots') {
-            for (var i = 0; i < 30; i++) {
-                var x = Math.random() * currentWidth;
-                var y = Math.random() * currentHeight;
+        }
+
+        function drawBoomerangs(ctx, width, height) {
+            const size = Math.min(width, height) / 15;
+            const spacing = size * 2;
+            
+            for (let x = 0; x < width + size; x += spacing) {
+                for (let y = 0; y < height + size; y += spacing) {
+                    ctx.save();
+                    ctx.translate(x + (y / spacing % 2) * spacing / 2, y);
+                    ctx.rotate((x + y) * 0.01);
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.quadraticCurveTo(size * 0.4, -size * 0.3, size * 0.8, 0);
+                    ctx.quadraticCurveTo(size * 0.4, size * 0.3, 0, 0);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+        }
+
+        function drawAtomicDots(ctx, width, height) {
+            const dotCount = Math.min(25, (width * height) / 10000);
+            const maxRadius = Math.min(width, height) / 30;
+            
+            for (let i = 0; i < dotCount; i++) {
+                const x = (i % 5 + 0.5) * (width / 5);
+                const y = (Math.floor(i / 5) + 0.5) * (height / 5);
+                const radius = maxRadius * (0.5 + Math.random() * 0.5);
+                
+                // Central dot
                 ctx.beginPath();
-                ctx.arc(x, y, Math.random() * 15 + 5, 0, Math.PI * 2);
+                ctx.arc(x, y, radius * 0.3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Orbital rings
+                for (let j = 1; j <= 2; j++) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius * 0.3 + j * radius * 0.4, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function drawZigzag(ctx, width, height) {
+            const spacing = Math.min(width, height) / 12;
+            const amplitude = spacing * 0.5;
+            
+            for (let y = spacing; y < height; y += spacing * 2) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                
+                for (let x = 0; x <= width; x += spacing) {
+                    const zigY = y + (Math.floor(x / spacing) % 2 === 0 ? amplitude : -amplitude);
+                    ctx.lineTo(x, zigY);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function drawTriangles(ctx, width, height) {
+            const size = Math.min(width, height) / 20;
+            const spacing = size * 1.8;
+            
+            for (let x = 0; x < width + size; x += spacing) {
+                for (let y = 0; y < height + size; y += spacing) {
+                    ctx.save();
+                    ctx.translate(x + (y / spacing % 2) * spacing / 2, y);
+                    ctx.rotate((x + y) * 0.01);
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(0, -size/2);
+                    ctx.lineTo(size/2, size/2);
+                    ctx.lineTo(-size/2, size/2);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+        }
+
+        function drawDiamondGrid(ctx, width, height) {
+            const size = Math.min(width, height) / 25;
+            const spacing = size * 1.5;
+            
+            for (let x = 0; x < width + spacing; x += spacing) {
+                for (let y = 0; y < height + spacing; y += spacing) {
+                    if ((Math.floor(x / spacing) + Math.floor(y / spacing)) % 2 === 0) {
+                        ctx.save();
+                        ctx.translate(x, y);
+                        ctx.rotate(Math.PI / 4);
+                        ctx.fillRect(-size/2, -size/2, size, size);
+                        ctx.restore();
+                    }
+                }
+            }
+        }
+
+        function drawWaves(ctx, width, height) {
+            const waveHeight = Math.min(width, height) / 30;
+            const frequency = 2 * Math.PI / (Math.min(width, height) / 4);
+            const spacing = Math.min(width, height) / 8;
+            
+            for (let y = 0; y < height; y += spacing) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                
+                for (let x = 0; x <= width; x += 5) {
+                    const waveY = y + Math.sin(x * frequency) * waveHeight;
+                    ctx.lineTo(x, waveY);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function drawRetroStripes(ctx, width, height) {
+            const stripeWidth = Math.min(width, height) / 25;
+            const angle = Math.PI / 6;
+            
+            ctx.save();
+            ctx.translate(width / 2, height / 2);
+            ctx.rotate(angle);
+            
+            const diagonal = Math.sqrt(width * width + height * height);
+            for (let x = -diagonal; x < diagonal; x += stripeWidth * 2) {
+                ctx.fillRect(x, -diagonal, stripeWidth, diagonal * 2);
+            }
+            ctx.restore();
+        }
+
+        function drawColorBlocks(ctx, width, height) {
+            const blockSize = Math.min(width, height) / 15;
+            
+            for (let x = 0; x < width; x += blockSize) {
+                for (let y = 0; y < height; y += blockSize) {
+                    if (Math.random() > 0.7) {
+                        ctx.fillRect(x, y, blockSize, blockSize);
+                    }
+                }
+            }
+        }
+
+        function drawSunburst(ctx, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const rays = 24;
+            const outerRadius = Math.min(width, height) * 0.4;
+            
+            for (let i = 0; i < rays; i++) {
+                const angle1 = (i * 2 * Math.PI) / rays;
+                const angle2 = ((i + 0.5) * 2 * Math.PI) / rays;
+                
+                if (i % 2 === 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, outerRadius, angle1, angle2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+        }
+
+        function drawCircles(ctx, width, height) {
+            const circleCount = Math.min(20, (width * height) / 8000);
+            const maxRadius = Math.min(width, height) / 15;
+            
+            for (let i = 0; i < circleCount; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const radius = Math.random() * maxRadius + maxRadius * 0.3;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
                 ctx.fill();
             }
-        } else {
-            // Default texture
-            for (var i = 0; i < 100; i++) {
-                ctx.fillRect(
-                    Math.random() * currentWidth,
-                    Math.random() * currentHeight,
-                    Math.random() * 50 + 10,
-                    2
-                );
-            }
         }
-        ctx.globalAlpha = 1;
-    }
 
-    function drawText(ctx) {
-        var mainText = document.getElementById('mainText').value || 'Enter your text here';
-        var author = document.getElementById('authorText').value;
-        var fontSize = parseInt(document.getElementById('textSize').value);
-        var fontFamily = document.getElementById('fontSelect').value;
-        var textColor = document.getElementById('textColor').value;
-        
-        ctx.fillStyle = textColor;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        
-        // Ensure font is properly loaded
-        ctx.font = fontSize + 'px ' + fontFamily;
-        
-        var lines = wrapText(ctx, mainText, currentWidth * 0.8);
-        var lineHeight = fontSize * 1.2;
-        var totalHeight = lines.length * lineHeight;
-        
-        if (author) {
-            totalHeight += fontSize * 0.6 + 30;
-        }
-        
-        var startY = (currentHeight - totalHeight) / 2;
-        
-        // Draw main text
-        for (var i = 0; i < lines.length; i++) {
-            ctx.fillText(lines[i], currentWidth / 2, startY + (i * lineHeight) + fontSize / 2);
-        }
-        
-        // Draw author if present
-        if (author) {
-            ctx.font = 'italic ' + (fontSize * 0.6) + 'px ' + fontFamily;
-            ctx.fillText('-- ' + author, currentWidth / 2, startY + totalHeight - fontSize * 0.6);
-        }
-    }
-
-    function wrapText(ctx, text, maxWidth) {
-        var words = text.split(' ');
-        var lines = [];
-        var currentLine = '';
-        
-        for (var i = 0; i < words.length; i++) {
-            var testLine = currentLine + words[i] + ' ';
-            var metrics = ctx.measureText(testLine);
-            var testWidth = metrics.width;
+        function drawAngularShapes(ctx, width, height) {
+            const shapeCount = Math.min(25, (width * height) / 6000);
+            const maxSize = Math.min(width, height) / 20;
             
-            if (testWidth > maxWidth && i > 0) {
-                lines.push(currentLine);
-                currentLine = words[i] + ' ';
-            } else {
-                currentLine = testLine;
+            for (let i = 0; i < shapeCount; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const size = Math.random() * maxSize + maxSize * 0.5;
+                const sides = Math.floor(Math.random() * 4) + 3;
+                
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(Math.random() * Math.PI);
+                
+                ctx.beginPath();
+                for (let j = 0; j < sides; j++) {
+                    const angle = (j * 2 * Math.PI) / sides;
+                    const px = Math.cos(angle) * size;
+                    const py = Math.sin(angle) * size;
+                    if (j === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
             }
         }
-        lines.push(currentLine);
-        return lines;
-    }
 
-    function downloadImage() {
-        var canvas = document.getElementById('canvas');
-        var link = document.createElement('a');
-        link.download = 'textshot-' + currentSizeName.replace(/\s+/g, '-').toLowerCase() + '.jpg';
-        
-        var tempCanvas = document.createElement('canvas');
-        var tempCtx = tempCanvas.getContext('2d');
-        tempCanvas.width = canvas.width;
-        tempCanvas.height = canvas.height;
-        
-        tempCtx.fillStyle = 'white';
-        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-        tempCtx.drawImage(canvas, 0, 0);
-        
-        link.href = tempCanvas.toDataURL('image/jpeg', 0.9);
-        link.click();
-        
-        showStatus('Image downloaded!', 'success');
-    }
+        function drawCurves(ctx, width, height) {
+            const curveCount = Math.max(5, Math.min(12, width / 200));
+            
+            for (let i = 0; i < curveCount; i++) {
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * width, Math.random() * height);
+                
+                for (let j = 0; j < 3; j++) {
+                    const cpx = Math.random() * width;
+                    const cpy = Math.random() * height;
+                    const x = Math.random() * width;
+                    const y = Math.random() * height;
+                    ctx.quadraticCurveTo(cpx, cpy, x, y);
+                }
+                ctx.stroke();
+            }
+        }
 
-    function copyImage() {
-        var canvas = document.getElementById('canvas');
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        
-        if (isMobile) {
-            if (navigator.share) {
-                canvas.toBlob(function(blob) {
-                    var file = new File([blob], 'textshot.png', { type: 'image/png' });
+        function drawHexagons(ctx, width, height) {
+            const size = Math.min(width, height) / 25;
+            const hexHeight = size * Math.sqrt(3);
+            
+            for (let row = 0; row < height / hexHeight + 2; row++) {
+                for (let col = 0; col < width / (size * 1.5) + 2; col++) {
+                    const x = col * size * 1.5;
+                    const y = row * hexHeight + (col % 2) * hexHeight / 2;
                     
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        navigator.share({
-                            title: 'Vintage Textshot',
-                            text: 'Check out this vintage textshot!',
-                            files: [file]
-                        }).then(function() {
-                            showStatus('Shared successfully!', 'success');
-                        }).catch(function() {
-                            showMobileInstructions();
-                        });
-                    } else {
-                        showMobileInstructions();
+                    if ((row + col) % 3 === 0) {
+                        ctx.beginPath();
+                        for (let i = 0; i < 6; i++) {
+                            const angle = i * Math.PI / 3;
+                            const px = x + size * Math.cos(angle);
+                            const py = y + size * Math.sin(angle);
+                            if (i === 0) ctx.moveTo(px, py);
+                            else ctx.lineTo(px, py);
+                        }
+                        ctx.closePath();
+                        ctx.fill();
                     }
-                });
-            } else {
-                showMobileInstructions();
-            }
-        } else {
-            if (navigator.clipboard && navigator.clipboard.write) {
-                canvas.toBlob(function(blob) {
-                    var item = new ClipboardItem({'image/png': blob});
-                    navigator.clipboard.write([item]).then(function() {
-                        showStatus('Image copied to clipboard!', 'success');
-                    }).catch(function() {
-                        showStatus('Clipboard copy failed - try download instead', 'error');
-                    });
-                });
-            } else {
-                showStatus('Clipboard not supported - use download instead', 'error');
+                }
             }
         }
-    }
 
-    function showMobileInstructions() {
-        showStatus('On mobile: Take a screenshot or use the download button to save your textshot!', 'success');
-    }
+        function drawOrganicShapes(ctx, width, height) {
+            const shapeCount = Math.min(15, (width * height) / 8000);
+            const maxSize = Math.min(width, height) / 20;
+            
+            for (let i = 0; i < shapeCount; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const size = Math.random() * maxSize + maxSize * 0.5;
+                
+                ctx.save();
+                ctx.translate(x, y);
+                
+                ctx.beginPath();
+                const points = 8;
+                for (let j = 0; j < points; j++) {
+                    const angle = (j * 2 * Math.PI) / points;
+                    const radius = size * (0.5 + Math.random() * 0.5);
+                    const px = Math.cos(angle) * radius;
+                    const py = Math.sin(angle) * radius;
+                    
+                    if (j === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        }
 
-    function showStatus(message, type) {
-        var status = document.getElementById('status');
-        status.textContent = message;
-        status.className = 'status ' + type;
-        
-        var timeout = message.length > 50 ? 5000 : 3000;
-        setTimeout(function() {
-            status.textContent = '';
-            status.className = 'status';
-        }, timeout);
-    }
+        function drawGoldCross(ctx, width, height) {
+            const spacing = Math.min(width, height) / 12;
+            const crossSize = spacing * 0.4;
+            
+            for (let x = spacing; x < width; x += spacing) {
+                for (let y = spacing; y < height; y += spacing) {
+                    // Main cross
+                    ctx.fillRect(x - crossSize/2, y - crossSize/8, crossSize, crossSize/4);
+                    ctx.fillRect(x - crossSize/8, y - crossSize/2, crossSize/4, crossSize);
+                    
+                    // Corner dots
+                    const dotRadius = crossSize / 12;
+                    for (let i = 0; i < 4; i++) {
+                        const angle = i * Math.PI / 2 + Math.PI / 4;
+                        const dx = Math.cos(angle) * crossSize * 0.4;
+                        const dy = Math.sin(angle) * crossSize * 0.4;
+                        ctx.beginPath();
+                        ctx.arc(x + dx, y + dy, dotRadius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+        }
 
-    window.addEventListener('load', init);
-</script>
-```
+        function drawKidneyShapes(ctx, width, height) {
+            const spacing = Math.min(width, height) / 15;
+            const size = spacing * 0.6;
+            
+            for (let x = spacing; x < width; x += spacing * 1.5) {
+                for (let y = spacing; y < height; y += spacing * 1.5) {
+                    ctx.save();
+                    ctx.translate(x + (Math.random() - 0.5) * spacing * 0.3, y + (Math.random() - 0.5) * spacing * 0.3);
+                    ctx.rotate(Math.random() * Math.PI);
+                    
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, size, size * 0.7, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+        }
 
+        function drawLeaves(ctx, width, height) {
+            const leafCount = Math.min(30, (width * height) / 5000);
+            const maxSize = Math.min(width, height) / 25;
+            
+            for (let i = 0; i < leafCount; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const size = Math.random() * maxSize + maxSize * 0.4;
+                
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(Math.random() * Math.PI * 2);
+                
+                ctx.beginPath();
+                ctx.ellipse(0, 0, size, size * 1.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function drawCrosses(ctx, width, height) {
+            const spacing = Math.min(width, height) / 15;
+            const crossSize = spacing * 0.4;
+            
+            for (let x = spacing; x < width; x += spacing) {
+                for (let y = spacing; y < height; y += spacing) {
+                    if (Math.random() > 0.4) {
+                        ctx.fillRect(x - crossSize/2, y - crossSize/10, crossSize, crossSize/5);
+                        ctx.fillRect(x - crossSize/10, y - crossSize/2, crossSize/5, crossSize);
+                    }
+                }
+            }
+        }
+
+        function drawText(ctx) {
+            const mainText = document.getElementById('mainText').value || 'Enter your text here';
+            const author = document.getElementById('authorText').value;
+            const fontSize = parseInt(document.getElementById('textSize').value);
+            const fontFamily = document.getElementById('fontSelect').value;
+            const textColor = document.getElementById('textColor').value;
+            
+            // Text styling
+            ctx.fillStyle = textColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'rgba(255,255,255,0.8)';
+            ctx.shadowBlur = Math.max(2, fontSize / 20);
+            ctx.shadowOffsetX = 1;
+            ctx.shadowOffsetY = 1;
+            
+            // Main text
+            ctx.font = `${fontSize}px ${fontFamily}`;
+            const lines = wrapText(ctx, mainText, currentWidth * 0.85);
+            const lineHeight = fontSize * 1.3;
+            const totalTextHeight = lines.length * lineHeight + (author ? fontSize * 0.7 + 20 : 0);
+            
+            let startY = (currentHeight - totalTextHeight) / 2;
+            
+            // Draw main text lines
+            lines.forEach((line, index) => {
+                ctx.fillText(line, currentWidth / 2, startY + (index * lineHeight) + fontSize / 2);
+            });
+            
+            // Draw author
+            if (author) {
+                ctx.font = `italic ${fontSize * 0.7}px ${fontFamily}`;
+                ctx.fillText('— ' + author, currentWidth / 2, startY + totalTextHeight - fontSize * 0.35);
+            }
+            
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+        }
+
+        function wrapText(ctx, text, maxWidth) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+            
+            for (let i = 0; i < words.length; i++) {
+                const testLine = currentLine + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > maxWidth && i > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = words[i] + ' ';
+                } else {
+                    currentLine = testLine;
+                }
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        function downloadImage() {
+            const canvas = document.getElementById('canvas');
+            const link = document.createElement('a');
+            const filename = `textshot-${currentSizeName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
+            
+            // Create high-quality image
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            
+            // White background for better compatibility
+            tempCtx.fillStyle = 'white';
+            tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            tempCtx.drawImage(canvas, 0, 0);
+            
+            link.download = filename;
+            link.href = tempCanvas.toDataURL('image/png', 1.0);
+            link.click();
+            
+            showStatus('🎉 Image downloaded successfully!', 'success');
+        }
+
+        function copyImage() {
+            const canvas = document.getElementById('canvas');
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                if (navigator.share) {
+                    canvas.toBlob(blob => {
+                        const file = new File([blob], 'vintage-textshot.png', { type: 'image/png' });
+                        
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            navigator.share({
+                                title: 'Vintage Textshot',
+                                text: 'Check out this vintage quote image!',
+                                files: [file]
+                            }).then(() => {
+                                showStatus('📱 Shared successfully!', 'success');
+                            }).catch(() => {
+                                showStatus('📱 On mobile: Save the image using the download button!', 'success');
+                            });
+                        } else {
+                            showStatus('📱 On mobile: Save the image using the download button!', 'success');
+                        }
+                    });
+                } else {
+                    showStatus('📱 On mobile: Save the image using the download button!', 'success');
+                }
+            } else {
+                // Desktop clipboard
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    canvas.toBlob(blob => {
+                        const item = new ClipboardItem({'image/png': blob});
+                        navigator.clipboard.write([item]).then(() => {
+                            showStatus('📋 Image copied to clipboard!', 'success');
+                        }).catch(() => {
+                            showStatus('❌ Clipboard copy failed - use download instead', 'error');
+                        });
+                    });
+                } else {
+                    showStatus('❌ Clipboard not supported - use download instead', 'error');
+                }
+            }
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            
+            setTimeout(() => {
+                status.textContent = '';
+                status.className = 'status';
+            }, 4000);
+        }
+
+        // Initialize the app
+        window.addEventListener('load', init);
+    </script>
 </body>
 </html>
