@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Textshot Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d4a574, #c49464);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+```
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .header {
+        text-align: center;
+        background: #8b4513;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+
+    .section h3 {
+        margin-top: 0;
+        color: #8b4513;
+    }
+
+    textarea, input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .size-option {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 8px;
+        border: 2px solid #ddd;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .size-option:hover {
+        border-color: #8b4513;
+        background: #f0f0f0;
+    }
+
+    .size-option.selected {
+        border-color: #8b4513;
+        background: #8b4513;
+        color: white;
+    }
+
+    .size-name {
+        font-weight: bold;
+        display: block;
+    }
+
+    .size-dims {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    .pattern-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+        gap: 8px;
+        margin-top: 10px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .pattern-btn {
+        width: 45px;
+        height: 45px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pattern-btn canvas {
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        display: block;
+    }
+
+    .pattern-btn.selected {
+        border-color: #8b4513;
+        transform: scale(1.1);
+    }
+
+    canvas {
+        max-width: 100%;
+        border: 2px solid #8b4513;
+        border-radius: 10px;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background: #8b4513;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #daa520;
+        color: black;
+    }
+
+    .status {
+        text-align: center;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+
+    .status.success {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status.error {
+        background: #f8d7da;
+        color: #721c24;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Vintage Textshot Generator</h1>
+            <p>Create beautiful quote images with hipster flair</p>
+        </div>
+
+```
+    <div class="section">
+        <h3>Text Input</h3>
+        <textarea id="mainText" rows="4" placeholder="Enter your text or quote here...">Make it vintage!</textarea>
+        <input type="text" id="authorText" placeholder="Author (optional)">
+    </div>
+
+    <div class="section">
+        <h3>Text Settings</h3>
+        <select id="fontSelect">
+            <option value="Georgia">Georgia (Classic)</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Impact">Impact</option>
+        </select>
+        <label>Text Size: <input type="range" id="textSize" min="20" max="100" value="50"></label>
+        <label>Text Color: <input type="color" id="textColor" value="#2c1810"></label>
+    </div>
+
+    <div class="section">
+        <h3>Export Size</h3>
+        <div id="sizeOptions">
+            <button class="size-option selected" onclick="selectSize(1080, 1080, 'Instagram Square', this)">
+                <span class="size-name">Instagram Square</span>
+                <span class="size-dims">1080 × 1080px</span>
+            </button>
+            <button class="size-option" onclick="selectSize(1080, 1350, 'Instagram Portrait', this)">
+                <span class="size-name">Instagram Portrait</span>
+                <span class="size-dims">1080 × 1350px</span>
+            </button>
+            <button class="size-option" onclick="selectSize(1080, 1920, 'Instagram Stories', this)">
+                <span class="size-name">Instagram Stories</span>
+                <span class="size-dims">1080 × 1920px</span>
+            </button>
+            <button class="size-option" onclick="selectSize(1200, 628, 'Facebook/LinkedIn', this)">
+                <span class="size-name">Facebook/LinkedIn</span>
+                <span class="size-dims">1200 × 628px</span>
+            </button>
+            <button class="size-option" onclick="selectSize(1200, 675, 'Bluesky/Social', this)">
+                <span class="size-name">Bluesky/Social</span>
+                <span class="size-dims">1200 × 675px</span>
+            </button>
+            <button class="size-option" onclick="selectSize(1000, 1500, 'Pinterest', this)">
+                <span class="size-name">Pinterest</span>
+                <span class="size-dims">1000 × 1500px</span>
+            </button>
+            <button class="size-option" onclick="selectSize(2000, 2000, 'High Resolution', this)">
+                <span class="size-name">High Resolution</span>
+                <span class="size-dims">2000 × 2000px</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Background Pattern</h3>
+        <div class="pattern-grid" id="patternGrid"></div>
+    </div>
+
+    <canvas id="canvas" width="800" height="800"></canvas>
+
+    <div class="buttons">
+        <button class="btn-primary" onclick="downloadImage()">💾 Download JPG</button>
+        <button class="btn-secondary" onclick="copyImage()">📋 Copy Image</button>
+    </div>
+
+    <div id="status"></div>
+</div>
+
+<script>
+    // Global variables
+    var currentWidth = 1080;
+    var currentHeight = 1080;
+    var currentSizeName = 'Instagram Square';
+    var currentPattern = 0;
+
+    // Pattern definitions - Mid-Century Modern & Retro Hipster (actual patterns only)
+    var patterns = [
+        {name: 'Atomic Starburst', type: 'starburst', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
+        {name: 'Boomerang Dreams', type: 'boomerang', color1: '#fff8dc', color2: '#deb887', accent: '#cd853f'},
+        {name: 'Kidney Bean', type: 'kidney', color1: '#ffe4b5', color2: '#d2b48c', accent: '#a0522d'},
+        {name: 'Atomic Dots', type: 'atomic_dots', color1: '#faf0e6', color2: '#bc8f8f', accent: '#8b4513'},
+        {name: 'Mid-Century Zigzag', type: 'zigzag', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
+        {name: 'Overlapping Circles', type: 'circles', color1: '#ffe4b5', color2: '#cd853f', accent: '#b8860b'},
+        {name: 'Angular Geometric', type: 'angular', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
+        {name: 'Sunburst Radial', type: 'sunburst', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
+        {name: 'Retro Triangles', type: 'triangles', color1: '#fff8dc', color2: '#d2b48c', accent: '#a0522d'},
+        {name: 'Abstract Leaves', type: 'leaves', color1: '#f4e4bc', color2: '#daa520', accent: '#8b6914'},
+        {name: 'Color Blocks', type: 'blocks', color1: '#ffe4b5', color2: '#cd853f', accent: '#8b4513'},
+        {name: 'Curved Lines', type: 'curves', color1: '#faf0e6', color2: '#bc8f8f', accent: '#8b7d6b'},
+        {name: 'Atomic Nucleus', type: 'nucleus', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
+        {name: 'Geometric Waves', type: 'waves', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
+        {name: 'Retro Stripes', type: 'retro_stripes', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'},
+        {name: 'Organic Shapes', type: 'organic', color1: '#ffe4b5', color2: '#d2b48c', accent: '#a0522d'},
+        {name: 'Atomic Age', type: 'atomic_age', color1: '#f4e4bc', color2: '#d4a574', accent: '#8b4513'},
+        {name: 'Boomerang Scatter', type: 'boomerang_scatter', color1: '#fff8dc', color2: '#deb887', accent: '#cd853f'},
+        {name: 'Diamond Grid', type: 'diamond', color1: '#f5f5dc', color2: '#a0522d', accent: '#654321'},
+        {name: 'Atomic Orbits', type: 'orbits', color1: '#f0e68c', color2: '#b8860b', accent: '#8b7d6b'},
+        {name: 'Retro Hexagons', type: 'hexagons', color1: '#ffe4b5', color2: '#cd853f', accent: '#8b4513'},
+        {name: 'Mid-Century Gold', type: 'gold_pattern', color1: '#fdf5e6', color2: '#daa520', accent: '#b8860b'}
+    ];
+
+    function init() {
+        createPatternButtons();
+        updateCanvas();
+        
+        // Add event listeners
+        document.getElementById('mainText').addEventListener('input', updateCanvas);
+        document.getElementById('authorText').addEventListener('input', updateCanvas);
+        document.getElementById('fontSelect').addEventListener('change', updateCanvas);
+        document.getElementById('textSize').addEventListener('input', updateCanvas);
+        document.getElementById('textColor').addEventListener('input', updateCanvas);
+    }
+
+    function createPatternButtons() {
+        var grid = document.getElementById('patternGrid');
+        for (var i = 0; i < patterns.length; i++) {
+            var btn = document.createElement('div');
+            btn.className = 'pattern-btn';
+            if (i === 0) btn.className += ' selected';
+            
+            // Create mini canvas preview of the actual pattern
+            var canvas = document.createElement('canvas');
+            canvas.width = 45;
+            canvas.height = 45;
+            var ctx = canvas.getContext('2d');
+            
+            // Draw the actual pattern preview
+            drawPatternPreview(ctx, patterns[i], 45, 45);
+            
+            btn.appendChild(canvas);
+            btn.onclick = createPatternHandler(i);
+            grid.appendChild(btn);
+        }
+    }
+
+    function drawPatternPreview(ctx, pattern, width, height) {
+        // Base gradient
+        var gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, pattern.color1);
+        gradient.addColorStop(1, pattern.color2);
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+        
+        // Draw simplified version of the pattern
+        ctx.fillStyle = pattern.accent;
+        ctx.strokeStyle = pattern.accent;
+        
+        switch(pattern.type) {
+            case 'starburst':
+                var centerX = width / 2;
+                var centerY = height / 2;
+                var rays = 8;
+                for (var i = 0; i < rays; i++) {
+                    var angle = (i * 2 * Math.PI) / rays;
+                    ctx.globalAlpha = 0.4;
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.lineTo(centerX + Math.cos(angle) * width * 0.4, centerY + Math.sin(angle) * height * 0.4);
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+                break;
+            case 'boomerang':
+            case 'boomerang_scatter':
+                for (var i = 0; i < 3; i++) {
+                    ctx.save();
+                    ctx.translate(Math.random() * width, Math.random() * height);
+                    ctx.rotate(Math.random() * Math.PI);
+                    ctx.globalAlpha = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.quadraticCurveTo(8, -3, 12, 0);
+                    ctx.quadraticCurveTo(8, 3, 0, 0);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                break;
+            case 'kidney':
+                for (var i = 0; i < 2; i++) {
+                    ctx.save();
+                    ctx.translate(i * 15 + 10, i * 15 + 10);
+                    ctx.globalAlpha = 0.4;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 8, 4, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                break;
+            case 'atomic_dots':
+                for (var i = 0; i < 3; i++) {
+                    var x = 8 + i * 12;
+                    var y = 8 + i * 12;
+                    ctx.globalAlpha = 0.5;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x, y, 6, 0, Math.PI * 2);
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 0.3;
+                    ctx.stroke();
+                }
+                break;
+            case 'zigzag':
+                ctx.beginPath();
+                ctx.moveTo(0, height/2);
+                for (var x = 0; x < width; x += 8) {
+                    var zigY = height/2 + (x / 8 % 2 === 0 ? 8 : -8);
+                    ctx.lineTo(x, zigY);
+                }
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 0.4;
+                ctx.stroke();
+                break;
+            case 'circles':
+                for (var i = 0; i < 4; i++) {
+                    ctx.globalAlpha = 0.3;
+                    ctx.beginPath();
+                    ctx.arc(10 + i * 8, 15 + i * 5, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                break;
+            case 'angular':
+                for (var i = 0; i < 3; i++) {
+                    var x = 8 + i * 10;
+                    var y = 8 + i * 10;
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.globalAlpha = 0.4;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -5);
+                    ctx.lineTo(4, 0);
+                    ctx.lineTo(0, 5);
+                    ctx.lineTo(-4, 0);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
+                break;
+            case 'sunburst':
+                var centerX = width / 2;
+                var centerY = height / 2;
+                var rays = 12;
+                for (var i = 0; i < rays; i++) {
+                    if (i % 2 === 0) {
+                        var angle1 = (i * 2 * Math.PI) / rays;
+                        var angle2 = ((i + 0.5) * 2 * Math.PI) / rays;
+                        ctx.globalAlpha = 0.4;
+                        ctx.beginPath();
+                        ctx.moveTo(centerX, centerY);
+                        ctx.arc(centerX, centerY, width * 0.4, angle1, angle2);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                }
+                break;
+            case 'triangles':
+                for (var i = 0; i < 3; i++) {
+                    ctx.save();
+                    ctx.translate(8 + i * 12, 8 + i * 12);
+                    ctx.globalAlpha = 0.4;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -4);
+                    ctx.lineTo(4, 4);
+                    ctx.lineTo(-4, 4);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
+                break;
+            case 'leaves':
+                for (var i = 0; i < 3; i++) {
+                    ctx.save();
+                    ctx.translate(8 + i * 12, 8 + i * 10);
+                    ctx.rotate(i * 0.5);
+                    ctx.globalAlpha = 0.4;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 3, 8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                break;
+            case 'blocks':
+                for (var x = 0; x < width; x += 15) {
+                    for (var y = 0; y < height; y += 15) {
+                        if (Math.random() > 0.6) {
+                            ctx.globalAlpha = 0.4;
+                            ctx.fillRect(x, y, 12, 12);
+                        }
+                    }
+                }
+                break;
+            case 'curves':
+                ctx.beginPath();
+                ctx.moveTo(0, height/2);
+                ctx.quadraticCurveTo(width/4, 10, width/2, height/2);
+                ctx.quadraticCurveTo(3*width/4, height-10, width, height/2);
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 0.4;
+                ctx.stroke();
+                break;
+            case 'nucleus':
+                var centerX = width / 2;
+                var centerY = height / 2;
+                ctx.globalAlpha = 0.6;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+                ctx.fill();
+                for (var i = 0; i < 2; i++) {
+                    ctx.globalAlpha = 0.3;
+                    ctx.beginPath();
+                    ctx.ellipse(centerX, centerY, 8 + i * 6, (8 + i * 6) * 0.3, i * Math.PI / 4, 0, Math.PI * 2);
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+                break;
+            case 'waves':
+                for (var y = 10; y < height; y += 15) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    for (var x = 0; x < width; x += 3) {
+                        var waveY = y + Math.sin(x * 0.2) * 4;
+                        ctx.lineTo(x, waveY);
+                    }
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 0.4;
+                    ctx.stroke();
+                }
+                break;
+            case 'retro_stripes':
+                ctx.save();
+                ctx.translate(width / 2, height / 2);
+                ctx.rotate(Math.PI / 6);
+                for (var x = -width; x < width; x += 8) {
+                    ctx.globalAlpha = 0.4;
+                    ctx.fillRect(x, -height, 4, height * 2);
+                }
+                ctx.restore();
+                break;
+            case 'organic':
+                for (var i = 0; i < 2; i++) {
+                    ctx.save();
+                    ctx.translate(10 + i * 15, 10 + i * 15);
+                    ctx.globalAlpha = 0.4;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    for (var j = 0; j < 6; j++) {
+                        var angle = (j * 2 * Math.PI) / 6;
+                        var radius = 6 * (0.5 + Math.random() * 0.5);
+                        var px = Math.cos(angle) * radius;
+                        var py = Math.sin(angle) * radius;
+                        ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
+                break;
+            case 'atomic_age':
+                // Combination preview
+                var centerX = width / 2;
+                var centerY = height / 2;
+                ctx.globalAlpha = 0.4;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+                ctx.fill();
+                for (var i = 0; i < 4; i++) {
+                    var angle = (i * 2 * Math.PI) / 4;
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.lineTo(centerX + Math.cos(angle) * 15, centerY + Math.sin(angle) * 15);
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+                break;
+            case 'diamond':
+                for (var x = 0; x < width; x += 12) {
+                    for (var y = 0; y < height; y += 12) {
+                        if ((x / 12 + y / 12) % 2 === 0) {
+                            ctx.save();
+                            ctx.translate(x + 6, y + 6);
+                            ctx.rotate(Math.PI / 4);
+                            ctx.globalAlpha = 0.4;
+                            ctx.fillRect(-3, -3, 6, 6);
+                            ctx.restore();
+                        }
+                    }
+                }
+                break;
+            case 'orbits':
+                var centerX = width / 2;
+                var centerY = height / 2;
+                for (var i = 0; i < 3; i++) {
+                    var radius = 6 + i * 8;
+                    ctx.globalAlpha = 0.3;
+                    ctx.beginPath();
+                    ctx.ellipse(centerX, centerY, radius, radius * 0.3, i * Math.PI / 6, 0, Math.PI * 2);
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+                break;
+            case 'hexagons':
+                for (var x = 8; x < width; x += 16) {
+                    for (var y = 8; y < height; y += 14) {
+                        if ((x + y) % 24 === 0) {
+                            ctx.globalAlpha = 0.4;
+                            ctx.beginPath();
+                            for (var i = 0; i < 6; i++) {
+                                var angle = i * Math.PI / 3;
+                                var px = x + 4 * Math.cos(angle);
+                                var py = y + 4 * Math.sin(angle);
+                                if (i === 0) ctx.moveTo(px, py);
+                                else ctx.lineTo(px, py);
+                            }
+                            ctx.closePath();
+                            ctx.fill();
+                        }
+                    }
+                }
+                break;
+            case 'gold_pattern':
+                for (var x = 10; x < width; x += 20) {
+                    for (var y = 10; y < height; y += 20) {
+                        ctx.globalAlpha = 0.5;
+                        ctx.fillRect(x - 6, y - 1, 12, 2);
+                        ctx.fillRect(x - 1, y - 6, 2, 12);
+                    }
+                }
+                break;
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function createPatternHandler(index) {
+        return function() {
+            var buttons = document.querySelectorAll('.pattern-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            currentPattern = index;
+            updateCanvas();
+        };
+    }
+
+    function selectSize(width, height, name, element) {
+        currentWidth = width;
+        currentHeight = height;
+        currentSizeName = name;
+        
+        var options = document.querySelectorAll('.size-option');
+        for (var i = 0; i < options.length; i++) {
+            options[i].classList.remove('selected');
+        }
+        element.classList.add('selected');
+        
+        updateCanvas();
+    }
+
+    function updateCanvas() {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        
+        canvas.width = currentWidth;
+        canvas.height = currentHeight;
+        
+        // Draw background pattern
+        drawBackground(ctx);
+        
+        // Draw text
+        drawText(ctx);
+    }
+
+    function drawBackground(ctx) {
+        var pattern = patterns[currentPattern];
+        
+        // Base gradient
+        var gradient = ctx.createLinearGradient(0, 0, currentWidth, currentHeight);
+        gradient.addColorStop(0, pattern.color1);
+        gradient.addColorStop(1, pattern.color2);
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, currentWidth, currentHeight);
+        
+        // Draw specific pattern
+        ctx.fillStyle = pattern.accent;
+        ctx.strokeStyle = pattern.accent;
+        
+        switch(pattern.type) {
+            case 'starburst':
+                drawStarburst(ctx, pattern);
+                break;
+            case 'boomerang':
+                drawBoomerangs(ctx, pattern);
+                break;
+            case 'kidney':
+                drawKidneyShapes(ctx, pattern);
+                break;
+            case 'atomic_dots':
+                drawAtomicDots(ctx, pattern);
+                break;
+            case 'zigzag':
+                drawZigzag(ctx, pattern);
+                break;
+            case 'circles':
+                drawOverlappingCircles(ctx, pattern);
+                break;
+            case 'angular':
+                drawAngularShapes(ctx, pattern);
+                break;
+            case 'sunburst':
+                drawSunburst(ctx, pattern);
+                break;
+            case 'triangles':
+                drawRetroTriangles(ctx, pattern);
+                break;
+            case 'leaves':
+                drawAbstractLeaves(ctx, pattern);
+                break;
+            case 'blocks':
+                drawColorBlocks(ctx, pattern);
+                break;
+            case 'curves':
+                drawCurvedLines(ctx, pattern);
+                break;
+            case 'nucleus':
+                drawAtomicNucleus(ctx, pattern);
+                break;
+            case 'waves':
+                drawGeometricWaves(ctx, pattern);
+                break;
+            case 'retro_stripes':
+                drawRetroStripes(ctx, pattern);
+                break;
+            case 'organic':
+                drawOrganicShapes(ctx, pattern);
+                break;
+            case 'atomic_age':
+                drawAtomicAge(ctx, pattern);
+                break;
+            case 'boomerang_scatter':
+                drawBoomerangScatter(ctx, pattern);
+                break;
+            case 'diamond':
+                drawDiamondGrid(ctx, pattern);
+                break;
+            case 'orbits':
+                drawAtomicOrbits(ctx, pattern);
+                break;
+            case 'hexagons':
+                drawRetroHexagons(ctx, pattern);
+                break;
+            case 'gold_pattern':
+                drawGoldPattern(ctx, pattern);
+                break;
+        }
+    }
+
+    function drawStarburst(ctx, pattern) {
+        var centerX = currentWidth / 2;
+        var centerY = currentHeight / 2;
+        var rays = 16;
+        var maxRadius = Math.max(currentWidth, currentHeight) * 0.8;
+        
+        for (var i = 0; i < rays; i++) {
+            var angle = (i * 2 * Math.PI) / rays;
+            ctx.globalAlpha = 0.3;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + Math.cos(angle) * maxRadius, centerY + Math.sin(angle) * maxRadius);
+            ctx.lineWidth = 4;
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawBoomerangs(ctx, pattern) {
+        var size = 80;
+        for (var x = 0; x < currentWidth + size; x += size * 1.5) {
+            for (var y = 0; y < currentHeight + size; y += size * 1.5) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(Math.random() * Math.PI);
+                ctx.globalAlpha = 0.4;
+                drawBoomerang(ctx, size);
+                ctx.restore();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawBoomerang(ctx, size) {
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(size * 0.3, -size * 0.2, size * 0.6, 0);
+        ctx.quadraticCurveTo(size * 0.3, size * 0.2, 0, 0);
+        ctx.fill();
+    }
+
+    function drawKidneyShapes(ctx, pattern) {
+        var size = 60;
+        for (var x = 0; x < currentWidth + size; x += size * 2) {
+            for (var y = 0; y < currentHeight + size; y += size * 2) {
+                ctx.save();
+                ctx.translate(x + Math.random() * 20, y + Math.random() * 20);
+                ctx.globalAlpha = 0.3;
+                drawKidneyShape(ctx, size);
+                ctx.restore();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawKidneyShape(ctx, size) {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, size * 0.6, size * 0.3, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(size * 0.2, size * 0.1, size * 0.3, size * 0.2, 0, 0, Math.PI * 2);
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function drawAtomicDots(ctx, pattern) {
+        for (var i = 0; i < 30; i++) {
+            var x = Math.random() * currentWidth;
+            var y = Math.random() * currentHeight;
+            var radius = Math.random() * 15 + 5;
+            
+            ctx.globalAlpha = 0.4;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add atomic rings
+            for (var j = 1; j <= 3; j++) {
+                ctx.beginPath();
+                ctx.arc(x, y, radius + j * 8, 0, Math.PI * 2);
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 0.2;
+                ctx.stroke();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawZigzag(ctx, pattern) {
+        var spacing = 40;
+        var amplitude = 20;
+        
+        for (var y = 0; y < currentHeight; y += spacing * 2) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            
+            for (var x = 0; x < currentWidth; x += spacing) {
+                var zigY = y + (x / spacing % 2 === 0 ? amplitude : -amplitude);
+                ctx.lineTo(x, zigY);
+            }
+            
+            ctx.lineWidth = 3;
+            ctx.globalAlpha = 0.3;
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawOverlappingCircles(ctx, pattern) {
+        var circles = [];
+        for (var i = 0; i < 15; i++) {
+            circles.push({
+                x: Math.random() * currentWidth,
+                y: Math.random() * currentHeight,
+                radius: Math.random() * 80 + 40
+            });
+        }
+        
+        for (var i = 0; i < circles.length; i++) {
+            ctx.globalAlpha = 0.2;
+            ctx.beginPath();
+            ctx.arc(circles[i].x, circles[i].y, circles[i].radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawAngularShapes(ctx, pattern) {
+        for (var i = 0; i < 20; i++) {
+            var x = Math.random() * currentWidth;
+            var y = Math.random() * currentHeight;
+            var size = Math.random() * 50 + 20;
+            var sides = Math.floor(Math.random() * 4) + 3;
+            
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(Math.random() * Math.PI);
+            ctx.globalAlpha = 0.3;
+            
+            ctx.beginPath();
+            for (var j = 0; j < sides; j++) {
+                var angle = (j * 2 * Math.PI) / sides;
+                var px = Math.cos(angle) * size;
+                var py = Math.sin(angle) * size;
+                if (j === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawSunburst(ctx, pattern) {
+        var centerX = currentWidth / 2;
+        var centerY = currentHeight / 2;
+        var rays = 24;
+        var innerRadius = 50;
+        var outerRadius = Math.min(currentWidth, currentHeight) * 0.4;
+        
+        for (var i = 0; i < rays; i++) {
+            var angle1 = (i * 2 * Math.PI) / rays;
+            var angle2 = ((i + 0.5) * 2 * Math.PI) / rays;
+            
+            if (i % 2 === 0) {
+                ctx.globalAlpha = 0.3;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, outerRadius, angle1, angle2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawRetroTriangles(ctx, pattern) {
+        var size = 60;
+        for (var x = 0; x < currentWidth + size; x += size * 1.5) {
+            for (var y = 0; y < currentHeight + size; y += size * 1.5) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(Math.random() * Math.PI);
+                ctx.globalAlpha = 0.4;
+                
+                ctx.beginPath();
+                ctx.moveTo(0, -size/2);
+                ctx.lineTo(size/2, size/2);
+                ctx.lineTo(-size/2, size/2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawAbstractLeaves(ctx, pattern) {
+        for (var i = 0; i < 25; i++) {
+            var x = Math.random() * currentWidth;
+            var y = Math.random() * currentHeight;
+            var size = Math.random() * 40 + 20;
+            
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(Math.random() * Math.PI);
+            ctx.globalAlpha = 0.3;
+            
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size * 0.3, size, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawColorBlocks(ctx, pattern) {
+        var blockSize = 80;
+        for (var x = 0; x < currentWidth; x += blockSize) {
+            for (var y = 0; y < currentHeight; y += blockSize) {
+                if (Math.random() > 0.7) {
+                    ctx.globalAlpha = 0.3;
+                    ctx.fillRect(x, y, blockSize, blockSize);
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawCurvedLines(ctx, pattern) {
+        for (var i = 0; i < 10; i++) {
+            ctx.beginPath();
+            ctx.moveTo(Math.random() * currentWidth, Math.random() * currentHeight);
+            
+            for (var j = 0; j < 5; j++) {
+                var cpx = Math.random() * currentWidth;
+                var cpy = Math.random() * currentHeight;
+                var x = Math.random() * currentWidth;
+                var y = Math.random() * currentHeight;
+                ctx.quadraticCurveTo(cpx, cpy, x, y);
+            }
+            
+            ctx.lineWidth = 4;
+            ctx.globalAlpha = 0.2;
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawAtomicNucleus(ctx, pattern) {
+        var centerX = currentWidth / 2;
+        var centerY = currentHeight / 2;
+        
+        // Central nucleus
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 30, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Electron orbits
+        for (var i = 0; i < 4; i++) {
+            var radius = 60 + i * 40;
+            ctx.globalAlpha = 0.2;
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, radius, radius * 0.3, i * Math.PI / 4, 0, Math.PI * 2);
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawGeometricWaves(ctx, pattern) {
+        var waveHeight = 30;
+        var frequency = 0.02;
+        
+        for (var y = 0; y < currentHeight; y += 60) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            
+            for (var x = 0; x < currentWidth; x += 10) {
+                var waveY = y + Math.sin(x * frequency) * waveHeight;
+                ctx.lineTo(x, waveY);
+            }
+            
+            ctx.lineWidth = 4;
+            ctx.globalAlpha = 0.3;
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawRetroStripes(ctx, pattern) {
+        var stripeWidth = 20;
+        var angle = Math.PI / 6; // 30 degrees
+        
+        ctx.save();
+        ctx.translate(currentWidth / 2, currentHeight / 2);
+        ctx.rotate(angle);
+        
+        for (var x = -currentWidth; x < currentWidth * 2; x += stripeWidth * 2) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillRect(x, -currentHeight, stripeWidth, currentHeight * 2);
+        }
+        
+        ctx.restore();
+        ctx.globalAlpha = 1;
+    }
+
+    function drawOrganicShapes(ctx, pattern) {
+        for (var i = 0; i < 15; i++) {
+            var x = Math.random() * currentWidth;
+            var y = Math.random() * currentHeight;
+            var size = Math.random() * 60 + 30;
+            
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.globalAlpha = 0.3;
+            
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            
+            for (var j = 0; j < 8; j++) {
+                var angle = (j * 2 * Math.PI) / 8;
+                var radius = size * (0.5 + Math.random() * 0.5);
+                var px = Math.cos(angle) * radius;
+                var py = Math.sin(angle) * radius;
+                
+                if (j === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawAtomicAge(ctx, pattern) {
+        // Combination of atomic elements
+        drawAtomicDots(ctx, pattern);
+        ctx.globalAlpha = 0.5;
+        drawStarburst(ctx, pattern);
+        ctx.globalAlpha = 1;
+    }
+
+    function drawBoomerangScatter(ctx, pattern) {
+        for (var i = 0; i < 40; i++) {
+            var x = Math.random() * currentWidth;
+            var y = Math.random() * currentHeight;
+            var size = Math.random() * 30 + 15;
+            
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(Math.random() * Math.PI * 2);
+            ctx.globalAlpha = 0.2;
+            drawBoomerang(ctx, size);
+            ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawDiamondGrid(ctx, pattern) {
+        var size = 50;
+        for (var x = 0; x < currentWidth + size; x += size) {
+            for (var y = 0; y < currentHeight + size; y += size) {
+                if ((x / size + y / size) % 2 === 0) {
+                    ctx.save();
+                    ctx.translate(x + size/2, y + size/2);
+                    ctx.rotate(Math.PI / 4);
+                    ctx.globalAlpha = 0.3;
+                    ctx.fillRect(-size/4, -size/4, size/2, size/2);
+                    ctx.restore();
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawAtomicOrbits(ctx, pattern) {
+        var centerX = currentWidth / 2;
+        var centerY = currentHeight / 2;
+        
+        for (var i = 0; i < 6; i++) {
+            var radius = 40 + i * 25;
+            var rotation = i * Math.PI / 6;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(rotation);
+            ctx.globalAlpha = 0.2;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, radius, radius * 0.3, 0, 0, Math.PI * 2);
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Add orbiting electrons
+            var electronX = Math.cos(Date.now() * 0.001 + i) * radius;
+            var electronY = Math.sin(Date.now() * 0.001 + i) * radius * 0.3;
+            ctx.beginPath();
+            ctx.arc(electronX, electronY, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawRetroHexagons(ctx, pattern) {
+        var size = 40;
+        var hexHeight = size * Math.sqrt(3) / 2;
+        
+        for (var row = 0; row < currentHeight / hexHeight + 2; row++) {
+            for (var col = 0; col < currentWidth / (size * 1.5) + 2; col++) {
+                var x = col * size * 1.5;
+                var y = row * hexHeight + (col % 2) * hexHeight / 2;
+                
+                if ((row + col) % 3 === 0) {
+                    ctx.globalAlpha = 0.3;
+                    drawHexagon(ctx, x, y, size * 0.4);
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawHexagon(ctx, x, y, radius) {
+        ctx.beginPath();
+        for (var i = 0; i < 6; i++) {
+            var angle = i * Math.PI / 3;
+            var px = x + radius * Math.cos(angle);
+            var py = y + radius * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function drawGoldPattern(ctx, pattern) {
+        // Luxurious gold-inspired pattern
+        var spacing = 60;
+        for (var x = 0; x < currentWidth; x += spacing) {
+            for (var y = 0; y < currentHeight; y += spacing) {
+                ctx.save();
+                ctx.translate(x + spacing/2, y + spacing/2);
+                ctx.globalAlpha = 0.4;
+                
+                // Draw ornate cross pattern
+                ctx.fillRect(-20, -3, 40, 6);
+                ctx.fillRect(-3, -20, 6, 40);
+                
+                // Add corner decorations
+                for (var i = 0; i < 4; i++) {
+                    ctx.save();
+                    ctx.rotate(i * Math.PI / 2);
+                    ctx.beginPath();
+                    ctx.arc(15, 15, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                
+                ctx.restore();
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawText(ctx) {
+        var mainText = document.getElementById('mainText').value || 'Enter your text here';
+        var author = document.getElementById('authorText').value;
+        var fontSize = parseInt(document.getElementById('textSize').value);
+        var fontFamily = document.getElementById('fontSelect').value;
+        var textColor = document.getElementById('textColor').value;
+        
+        ctx.fillStyle = textColor;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // Main text
+        ctx.font = fontSize + 'px ' + fontFamily;
+        var lines = wrapText(ctx, mainText, currentWidth * 0.8);
+        var lineHeight = fontSize * 1.2;
+        var totalHeight = lines.length * lineHeight;
+        
+        if (author) {
+            totalHeight += fontSize * 0.6 + 30;
+        }
+        
+        var startY = (currentHeight - totalHeight) / 2;
+        
+        for (var i = 0; i < lines.length; i++) {
+            ctx.fillText(lines[i], currentWidth / 2, startY + (i * lineHeight) + fontSize / 2);
+        }
+        
+        // Author text
+        if (author) {
+            ctx.font = 'italic ' + (fontSize * 0.6) + 'px ' + fontFamily;
+            ctx.fillText('-- ' + author, currentWidth / 2, startY + totalHeight - fontSize * 0.6);
+        }
+    }
+
+    function wrapText(ctx, text, maxWidth) {
+        var words = text.split(' ');
+        var lines = [];
+        var currentLine = '';
+        
+        for (var i = 0; i < words.length; i++) {
+            var testLine = currentLine + words[i] + ' ';
+            var metrics = ctx.measureText(testLine);
+            var testWidth = metrics.width;
+            
+            if (testWidth > maxWidth && i > 0) {
+                lines.push(currentLine);
+                currentLine = words[i] + ' ';
+            } else {
+                currentLine = testLine;
+            }
+        }
+        lines.push(currentLine);
+        return lines;
+    }
+
+    function downloadImage() {
+        var canvas = document.getElementById('canvas');
+        var link = document.createElement('a');
+        link.download = 'textshot-' + currentSizeName.replace(/\s+/g, '-').toLowerCase() + '.jpg';
+        
+        // Convert to JPG with white background
+        var tempCanvas = document.createElement('canvas');
+        var tempCtx = tempCanvas.getContext('2d');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        
+        tempCtx.fillStyle = 'white';
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.drawImage(canvas, 0, 0);
+        
+        link.href = tempCanvas.toDataURL('image/jpeg', 0.9);
+        link.click();
+        
+        showStatus('Image downloaded!', 'success');
+    }
+
+    function copyImage() {
+        var canvas = document.getElementById('canvas');
+        
+        if (navigator.clipboard && navigator.clipboard.write) {
+            canvas.toBlob(function(blob) {
+                var item = new ClipboardItem({'image/png': blob});
+                navigator.clipboard.write([item]).then(function() {
+                    showStatus('Image copied to clipboard!', 'success');
+                }).catch(function() {
+                    showStatus('Failed to copy image', 'error');
+                });
+            });
+        } else {
+            showStatus('Clipboard not supported in this browser', 'error');
+        }
+    }
+
+    function showStatus(message, type) {
+        var status = document.getElementById('status');
+        status.textContent = message;
+        status.className = 'status ' + type;
+        setTimeout(function() {
+            status.textContent = '';
+            status.className = 'status';
+        }, 3000);
+    }
+
+    // Initialize when page loads
+    window.addEventListener('load', init);
+</script>
+```
+
+</body>
+</html>
