@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Textshot Generator</title>
     <!-- Google Fonts for Vintage/Hipster Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Oswald:wght@300;400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Abril+Fatface&family=Amatic+SC:wght@400;700&family=Fredoka+One&family=Lobster&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&family=Righteous&family=Alfa+Slab+One&family=Bebas+Neue&family=Fjalla+One&family=Anton&family=Russo+One&family=Monoton&family=Creepster&family=Bungee&family=Fredericka+the+Great&family=Special+Elite&family=Courier+Prime&family=Major+Mono+Display&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Crimson+Text:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Old+Standard+TT:wght@400;700&family=EB+Garamond:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Abril+Fatface&family=Amatic+SC:wght@400;700&family=Fredoka+One&family=Lobster&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&family=Righteous&family=Alfa+Slab+One&family=Bebas+Neue&family=Fjalla+One&family=Anton&family=Russo+One&family=Monoton&family=Creepster&family=Bungee&family=Fredericka+the+Great&family=Special+Elite&family=Courier+Prime&family=Major+Mono+Display&family=VT323&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #d4a574, #c49464);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
+        /* Ensure fonts load properly */
+        * {
+            font-display: swap;
         }
 
 ```
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #d4a574, #c49464);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+    }
+
     .container {
         max-width: 600px;
         margin: 0 auto;
@@ -201,35 +206,35 @@
     <div class="section">
         <h3>Text Settings</h3>
         <select id="fontSelect">
-            <option value="'Playfair Display', serif">Playfair Display (Elegant Serif)</option>
-            <option value="'EB Garamond', serif">EB Garamond (Classic Renaissance)</option>
-            <option value="'Cormorant Garamond', serif">Cormorant Garamond (Refined)</option>
-            <option value="'Libre Baskerville', serif">Libre Baskerville (Colonial)</option>
-            <option value="'Old Standard TT', serif">Old Standard (Academic)</option>
-            <option value="'Crimson Text', serif">Crimson Text (Literary)</option>
-            <option value="Lora, serif">Lora (Modern Classic)</option>
-            <option value="Merriweather, serif">Merriweather (Readable Serif)</option>
-            <option value="'Abril Fatface', serif">Abril Fatface (Magazine Display)</option>
-            <option value="'Alfa Slab One', serif">Alfa Slab One (Bold Slab)</option>
+            <option value="'Playfair Display', Georgia, serif">Playfair Display (Elegant Serif)</option>
+            <option value="'EB Garamond', Georgia, serif">EB Garamond (Classic Renaissance)</option>
+            <option value="'Cormorant Garamond', Georgia, serif">Cormorant Garamond (Refined)</option>
+            <option value="'Libre Baskerville', Georgia, serif">Libre Baskerville (Colonial)</option>
+            <option value="'Old Standard TT', 'Times New Roman', serif">Old Standard (Academic)</option>
+            <option value="'Crimson Text', Georgia, serif">Crimson Text (Literary)</option>
+            <option value="Lora, Georgia, serif">Lora (Modern Classic)</option>
+            <option value="Merriweather, Georgia, serif">Merriweather (Readable Serif)</option>
+            <option value="'Abril Fatface', Georgia, serif">Abril Fatface (Magazine Display)</option>
+            <option value="'Alfa Slab One', Georgia, serif">Alfa Slab One (Bold Slab)</option>
             <option value="Georgia, serif">Georgia (Web Classic)</option>
             <option value="'Times New Roman', serif">Times New Roman (Traditional)</option>
-            <option value="Oswald, sans-serif">Oswald (Geometric Sans)</option>
-            <option value="'Bebas Neue', sans-serif">Bebas Neue (Modern Condensed)</option>
-            <option value="'Fjalla One', sans-serif">Fjalla One (Nordic Sans)</option>
-            <option value="Anton, sans-serif">Anton (Bold Modern)</option>
-            <option value="'Russo One', sans-serif">Russo One (Strong Sans)</option>
-            <option value="Righteous, sans-serif">Righteous (Retro Sans)</option>
-            <option value="'Amatic SC', sans-serif">Amatic SC (Hand Drawn)</option>
-            <option value="'Fredoka One', sans-serif">Fredoka One (Playful)</option>
+            <option value="Oswald, Arial, sans-serif">Oswald (Geometric Sans)</option>
+            <option value="'Bebas Neue', Arial, sans-serif">Bebas Neue (Modern Condensed)</option>
+            <option value="'Fjalla One', Arial, sans-serif">Fjalla One (Nordic Sans)</option>
+            <option value="Anton, Arial, sans-serif">Anton (Bold Modern)</option>
+            <option value="'Russo One', Arial, sans-serif">Russo One (Strong Sans)</option>
+            <option value="Righteous, Arial, sans-serif">Righteous (Retro Sans)</option>
+            <option value="'Amatic SC', Arial, sans-serif">Amatic SC (Hand Drawn)</option>
+            <option value="'Fredoka One', Arial, sans-serif">Fredoka One (Playful)</option>
             <option value="Lobster, cursive">Lobster (Retro Script)</option>
             <option value="'Dancing Script', cursive">Dancing Script (Elegant Script)</option>
             <option value="'Great Vibes', cursive">Great Vibes (Flowing Script)</option>
             <option value="Pacifico, cursive">Pacifico (Casual Script)</option>
             <option value="'Fredericka the Great', cursive">Fredericka (Ornate Script)</option>
-            <option value="'Special Elite', monospace">Special Elite (Typewriter)</option>
-            <option value="'Courier Prime', monospace">Courier Prime (Clean Type)</option>
-            <option value="'Major Mono Display', monospace">Major Mono (Display Type)</option>
-            <option value="VT323, monospace">VT323 (Terminal/Retro)</option>
+            <option value="'Special Elite', 'Courier New', monospace">Special Elite (Typewriter)</option>
+            <option value="'Courier Prime', 'Courier New', monospace">Courier Prime (Clean Type)</option>
+            <option value="'Major Mono Display', 'Courier New', monospace">Major Mono (Display Type)</option>
+            <option value="VT323, 'Courier New', monospace">VT323 (Terminal/Retro)</option>
             <option value="'Courier New', monospace">Courier New (Classic Type)</option>
             <option value="Monoton, cursive">Monoton (Art Deco)</option>
             <option value="Creepster, cursive">Creepster (Horror Vintage)</option>
@@ -286,7 +291,7 @@
         <button class="btn-secondary" onclick="copyImage()">📱 Share/Copy</button>
     </div>
 
-    <div class="sharing-note">
+    <div class="sharing-note" style="margin-top: 15px; padding: 15px; background: rgba(139, 69, 19, 0.1); border-radius: 8px; border-left: 4px solid #8b4513; font-size: 14px; line-height: 1.4;">
         <strong>📱 Mobile Usage:</strong><br>
         • On iPhone/mobile: Use "Share/Copy" to share via Messages, Instagram, etc.<br>
         • Or download and save to your photos<br>
@@ -332,11 +337,18 @@
 
     function init() {
         createPatternButtons();
-        updateCanvas();
+        
+        // Wait for fonts to load before first render
+        setTimeout(function() {
+            updateCanvas();
+        }, 500);
         
         document.getElementById('mainText').addEventListener('input', updateCanvas);
         document.getElementById('authorText').addEventListener('input', updateCanvas);
-        document.getElementById('fontSelect').addEventListener('change', updateCanvas);
+        document.getElementById('fontSelect').addEventListener('change', function() {
+            // Small delay when changing fonts to ensure they load
+            setTimeout(updateCanvas, 100);
+        });
         document.getElementById('textSize').addEventListener('input', updateCanvas);
         document.getElementById('textColor').addEventListener('input', updateCanvas);
     }
@@ -525,7 +537,9 @@
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         
+        // Ensure font is properly loaded
         ctx.font = fontSize + 'px ' + fontFamily;
+        
         var lines = wrapText(ctx, mainText, currentWidth * 0.8);
         var lineHeight = fontSize * 1.2;
         var totalHeight = lines.length * lineHeight;
@@ -536,10 +550,12 @@
         
         var startY = (currentHeight - totalHeight) / 2;
         
+        // Draw main text
         for (var i = 0; i < lines.length; i++) {
             ctx.fillText(lines[i], currentWidth / 2, startY + (i * lineHeight) + fontSize / 2);
         }
         
+        // Draw author if present
         if (author) {
             ctx.font = 'italic ' + (fontSize * 0.6) + 'px ' + fontFamily;
             ctx.fillText('-- ' + author, currentWidth / 2, startY + totalHeight - fontSize * 0.6);
